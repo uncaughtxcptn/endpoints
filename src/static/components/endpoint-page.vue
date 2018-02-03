@@ -1,5 +1,13 @@
 <template>
     <div class="endpoint-page">
-        <h1>Endpoint Page</h1>
+        <app-header></app-header>
     </div>
 </template>
+
+<script>
+    export default {
+        components: {
+            'app-header': require('./app-header.vue').default
+        }
+    };
+</script>
