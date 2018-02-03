@@ -49,4 +49,8 @@
     .wrapper {
         padding: 5rem 0;
     }
+
+    .request-logs {
+        margin-top: 5rem;
+    }
 </style>
