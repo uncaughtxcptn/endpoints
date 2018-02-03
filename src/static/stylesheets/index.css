@@ -5,14 +5,23 @@
     margin: 0;
 }
 
+:root {
+    --primary-color: #2196f3;
+    --primary-color-dark-1: #1976d2;
+
+    --gray-1: #eee;
+}
+
 html {
     font-size: 62.5%;
 }
 
 body {
     min-height: 100vh;
-    font-family: monospace;
+    font-family: "Roboto Mono", monospace;
     font-size: 1.6rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     color: #333;
 }
 
@@ -21,4 +30,11 @@ input,
 button {
     font: inherit;
     color: inherit;
+}
+
+
+/** Utility classes **/
+
+.wrapper {
+    width: 80rem;
 }

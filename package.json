@@ -4,7 +4,9 @@
   "description": "View and send custom responses to requests on HTTP endpoints",
   "main": "index.js",
   "scripts": {
+    "prebuild": "rm -rf src/static/build",
     "build": "./node_modules/.bin/webpack",
+    "build:watch": "./node_modules/.bin/webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
