@@ -5,6 +5,13 @@
     margin: 0;
 }
 
+:root {
+    --primary-color: #2196f3;
+    --primary-color-dark-1: #1976d2;
+
+    --gray-1: #eee;
+}
+
 html {
     font-size: 62.5%;
 }
