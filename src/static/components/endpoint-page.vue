@@ -4,6 +4,14 @@
 
         <div class="wrapper">
             <endpoint-header></endpoint-header>
+
+            <div class="request-logs">
+                <request-log
+                    v-for="(requestLog, index) in requestLogs"
+                    :key="index"
+                    :data="requestLogs">
+                </request-log>
+            </div>
         </div>
     </div>
 </template>
@@ -13,9 +21,16 @@
     import store from '../store';
 
     export default {
+        computed: mapState(['requestLogs']),
+
         components: {
             'app-header': require('./app-header.vue').default,
-            'endpoint-header': require('./endpoint-header.vue').default
+            'endpoint-header': require('./endpoint-header.vue').default,
+            'request-log': require('./request-log.vue').default
+        },
+
+        mounted() {
+            this.$store.dispatch('fetchRequestLogs');
         },
 
         beforeRouteEnter(to, from, next) {
