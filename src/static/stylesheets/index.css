@@ -8,8 +8,11 @@
 :root {
     --primary-color: #2196f3;
     --primary-color-dark-1: #1976d2;
+    --primary-text-color: #333;
 
     --gray-1: #eee;
+    --gray-2: #bbb;
+    --gray-3: #888;
 }
 
 html {
