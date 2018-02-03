@@ -22,3 +22,10 @@ button {
     font: inherit;
     color: inherit;
 }
+
+
+/** Utility classes **/
+
+.wrapper {
+    width: 80rem;
+}
