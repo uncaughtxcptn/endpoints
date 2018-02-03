@@ -1,2 +1,4 @@
 endpoints_env/*
+node_modules
+build
 *.pyc

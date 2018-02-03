@@ -1,0 +1,24 @@
+*,
+*::before,
+*::after {
+    box-sizing: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    min-height: 100vh;
+    font-family: monospace;
+    font-size: 1.6rem;
+    color: #333;
+}
+
+a,
+input,
+button {
+    font: inherit;
+    color: inherit;
+}
