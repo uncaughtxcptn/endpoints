@@ -2,10 +2,26 @@
     <header class="app-header">
         <div class="wrapper">
             <router-link :to="{ name: 'landing-page' }" class="logo">Endpoints</router-link>
-            <button>Create Endpoint</button>
+            <button @click="onClick">Create Endpoint</button>
         </div>
     </header>
 </template>
+
+<script>
+    export default {
+        methods: {
+            onClick(e) {
+                // TODO: Get actual endpoint id/hash from backend.
+                const hash = 'abcdefghijklmnopqrstuvwxyz';
+
+                this.$router.push({
+                    name: 'endpoint-page',
+                    params: { hash }
+                });
+            }
+        }
+    };
+</script>
 
 <style scoped>
     .app-header {
@@ -27,10 +43,10 @@
     }
 
     button {
-        padding: 8px 16px;
+        padding: 0.5em 1em;
         border: 1px solid var(--primary-color-dark-1);
         border-radius: 2px;
-        font-size: 14px;
+        font-size: 13px;
         text-transform: uppercase;
         color: #fff;
         background-color: var(--primary-color);
