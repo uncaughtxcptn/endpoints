@@ -9,7 +9,7 @@
                 <request-log
                     v-for="(requestLog, index) in requestLogs"
                     :key="index"
-                    :data="requestLogs">
+                    :data="requestLog">
                 </request-log>
             </div>
         </div>
