@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         baseUrl: process.env.BASE_URL || 'localhost:3000',
-        hash: null
+        hash: null,
+        requestLogs: []
     },
 
     mutations: {
@@ -16,6 +17,28 @@ export default new Vuex.Store({
 
         unsetHash(state) {
             state.hash = null;
+        },
+
+        setRequestLogs(state, requestLogs) {
+            state.requestLogs = requestLogs;
+        },
+
+        unsetRequestLogs(state) {
+            state.requestLogs = [];
+        }
+    },
+
+    actions: {
+        fetchRequestLogs(context) {
+            // TODO: Request logs should be fetched from the backend.
+            const requestLogs = [
+                { method: 'GET', timestamp: Date.now() },
+                { method: 'GET', timestamp: Date.now() },
+                { method: 'GET', timestamp: Date.now() },
+                { method: 'GET', timestamp: Date.now() },
+                { method: 'GET', timestamp: Date.now() }
+            ];
+            context.commit('setRequestLogs', requestLogs);
         }
     }
 });
