@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/uncaughtxcptn/endpoints/issues"
   },
-  "homepage": "https://github.com/uncaughtxcptn/endpoints#readme"
+  "homepage": "https://github.com/uncaughtxcptn/endpoints#readme",
+  "devDependencies": {
+    "vue-loader": "14.1.1",
+    "vue-template-compiler": "2.5.13",
+    "webpack": "3.10.0"
+  }
 }
