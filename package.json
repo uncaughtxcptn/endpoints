@@ -1,0 +1,32 @@
+{
+  "name": "endpoints",
+  "version": "1.0.0",
+  "description": "View and send custom responses to requests on HTTP endpoints",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uncaughtxcptn/endpoints.git"
+  },
+  "author": "Arnelle Balane <arnellebalane@gmail.com> (https://arnellebalane.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uncaughtxcptn/endpoints/issues"
+  },
+  "homepage": "https://github.com/uncaughtxcptn/endpoints#readme",
+  "devDependencies": {
+    "css-loader": "0.28.9",
+    "style-loader": "0.20.1",
+    "vue-loader": "14.1.1",
+    "vue-template-compiler": "2.5.13",
+    "webpack": "3.10.0"
+  },
+  "dependencies": {
+    "vue": "2.5.13",
+    "vue-router": "3.0.1",
+    "vuex": "3.0.1"
+  }
+}
