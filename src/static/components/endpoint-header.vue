@@ -3,6 +3,10 @@
         <header>
             <h2>{{ baseUrl }}/<span>{{ hash }}</span></h2>
         </header>
+        <div class="switches">
+            <labelled-switch label="Live" :checked="true"></labelled-switch>
+            <labelled-switch label="Auto Response" :checked="true"></labelled-switch>
+        </div>
     </section>
 </template>
 
@@ -10,7 +14,11 @@
     import { mapState } from 'vuex';
 
     export default {
-        computed: mapState(['baseUrl', 'hash'])
+        computed: mapState(['baseUrl', 'hash']),
+
+        components: {
+            'labelled-switch': require('./labelled-switch.vue').default
+        }
     };
 </script>
 
@@ -24,5 +32,17 @@
     span {
         font-weight: 400;
         color: var(--primary-text-color);
+    }
+
+    .switches {
+        margin-top: 0.8rem;
+    }
+
+    .labelled-switch {
+        text-transform: uppercase;
+    }
+
+    .labelled-switch:not(:last-child) {
+        margin-right: 0.8rem;
     }
 </style>
