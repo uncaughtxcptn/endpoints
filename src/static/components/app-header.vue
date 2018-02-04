@@ -27,6 +27,7 @@
     .app-header {
         padding: 1.6rem 0;
         border-bottom: 1px solid var(--gray-1);
+        background-color: #fff;
     }
 
     .wrapper {
@@ -45,7 +46,7 @@
         padding: 0.5em 1em;
         border: 1px solid var(--primary-color-dark-1);
         border-radius: 2px;
-        font-size: 13px;
+        font-size: 1.3rem;
         text-transform: uppercase;
         color: #fff;
         background-color: var(--primary-color);
