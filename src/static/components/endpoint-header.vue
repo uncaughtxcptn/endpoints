@@ -8,7 +8,7 @@
             <labelled-switch label="Auto Response" :checked="autoResponse" @change="onAutoResponseChange"></labelled-switch>
         </div>
 
-        <response-form v-if="autoResponse"></response-form>
+        <response-form v-if="autoResponse" @submit="onAutoResponseSubmit"></response-form>
     </section>
 </template>
 
@@ -32,6 +32,10 @@
 
             onAutoResponseChange(autoResponse) {
                 this.autoResponse = autoResponse;
+            },
+
+            onAutoResponseSubmit(response) {
+                this.$store.dispatch('setAutoResponse', response);
             }
         },
 
