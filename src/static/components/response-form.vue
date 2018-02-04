@@ -4,7 +4,7 @@
             <tr>
                 <td class="padded">Status Code</td>
                 <td>
-                    <select v-model="statusCode">
+                    <select v-model="form.statusCode">
                         <optgroup label="Informational">
                             <option v-for="choice in statusCodeGroup(100, 199)" :value="choice.code">{{ choice.code }} {{ choice.text }}</option>
                         </optgroup>
@@ -25,7 +25,7 @@
                 <td class="actions"></td>
             </tr>
 
-            <tr v-for="(header, index) in headers">
+            <tr v-for="(header, index) in form.headers">
                 <td><input type="text" v-model="header.name"></td>
                 <td><input type="text" v-model="header.value"></td>
                 <td class="actions">
@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td colspan="3">
-                    <textarea v-model="responseBody"></textarea>
+                    <textarea v-model="form.responseBody"></textarea>
                 </td>
             </tr>
 
@@ -60,11 +60,13 @@
 
         data() {
             return {
-                statusCode: null,
-                headers: [
-                    { name: 'Content-Type', value: null }
-                ],
-                responseBody: null
+                form: {
+                    statusCode: null,
+                    headers: [
+                        { name: 'Content-Type', value: null }
+                    ],
+                    responseBody: null
+                }
             };
         },
 
@@ -75,11 +77,11 @@
             },
 
             addHeader() {
-                this.headers = [...this.headers, { name: null, value: null }];
+                this.form.headers = [...this.form.headers, { name: null, value: null }];
             },
 
             removeHeader(index) {
-                this.headers = this.headers.filter((header, i) => i !== index);
+                this.form.headers = this.form.headers.filter((header, i) => i !== index);
             }
         }
     };
