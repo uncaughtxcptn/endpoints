@@ -5,11 +5,7 @@
             <time class="timestamp" :datetime="data.timestamp">{{ date }}</time>
         </header>
 
-        <div v-if="isExpanded" class="section request-details">
-            <p>GET /abcdefghijklmnopqrstuvwxyz HTTP/1.1</p>
-            <p>Host: localhost:3000</p>
-            <p>Accept: application/json</p>
-        </div>
+        <request-details class="section" v-if="isExpanded" :data="data.request"></request-details>
 
         <div v-if="isExpanded" class="section response-details">
             <p>HTTP/1.1 200 OK</p>
@@ -46,6 +42,10 @@
             toggleExpanded() {
                 this.isExpanded = !this.isExpanded;
             }
+        },
+
+        components: {
+            'request-details': require('./request-details.vue').default
         }
     };
 </script>
@@ -69,7 +69,6 @@
         cursor: pointer;
     }
 
-    .request-details,
     .response-details {
         padding: 0.4rem 0.8rem;
     }
