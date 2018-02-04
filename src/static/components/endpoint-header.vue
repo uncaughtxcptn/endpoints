@@ -34,8 +34,25 @@
                 this.autoResponse = autoResponse;
             },
 
-            onAutoResponseSubmit(response) {
-                this.$store.dispatch('setAutoResponse', response);
+            async onAutoResponseSubmit(data) {
+                data.responseBody = data.responseBody || '';
+                const endpoint = `/${this.hash}/response`;
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    body: this.objectToFormData(data)
+                }).then(response => response.json());
+            },
+
+            objectToFormData(data) {
+                const formData = new FormData();
+                Object.keys(data).forEach(key => {
+                    let value = data[key];
+                    if (typeof value === 'object') {
+                        value = JSON.stringify(value);
+                    }
+                    formData.set(key, value);
+                });
+                return formData;
             }
         },
 

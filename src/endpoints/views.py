@@ -89,12 +89,12 @@ async def set_response_data(request):
         if endpoint is None:
             raise web.HTTPNotFound()
         post_data = await request.post()
-        status_code = post_data.get('status_code', 200)
+        status_code = post_data.get('statusCode', 200)
         try:
             headers = json.loads(post_data.get('headers'))
         except TypeError:
             headers = []
-        response_body = post_data.get('response_body', '')
+        response_body = post_data.get('responseBody', '')
         header_dict = {}
         for item in headers:
             header_dict[item['name']] = item['value']
