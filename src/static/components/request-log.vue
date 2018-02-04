@@ -37,7 +37,7 @@
             },
 
             date() {
-                const date = new Date(this.data.timestamp);
+                const date = new Date(this.data.when);
                 return format(date, 'MMM D, YYYY hh:mm:ss A');
             }
         },
