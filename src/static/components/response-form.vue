@@ -1,5 +1,5 @@
 <template>
-    <form action="#" class="response-form">
+    <form action="#" class="response-form" @submit.prevent="onSubmit">
         <table>
             <tr>
                 <td class="padded">Status Code</td>
@@ -44,7 +44,7 @@
 
             <tr>
                 <td colspan="3" class="form-actions">
-                    <button class="send-btn">Send Response</button>
+                    <button class="send-btn">Set Response</button>
                     <button type="button" @click="addHeader">Add Header</button>
                 </td>
             </tr>
@@ -82,6 +82,19 @@
 
             removeHeader(index) {
                 this.form.headers = this.form.headers.filter((header, i) => i !== index);
+            },
+
+            onSubmit() {
+                this.$emit('submit', {
+                    statusCode: this.form.statusCode,
+                    responseBody: this.form.responseBody,
+                    headers: this.form.headers.reduce((headers, header) => {
+                        if (header.name && header.name.trim() && header.value && header.value.trim()) {
+                            headers.push({ name: header.name, value: header.value });
+                        }
+                        return headers;
+                    }, [])
+                });
             }
         }
     };
