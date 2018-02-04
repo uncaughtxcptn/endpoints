@@ -40,54 +40,9 @@ export default new Vuex.Store({
     },
 
     actions: {
-        fetchRequestLogs(context) {
-            // TODO: Request logs should be fetched from the backend.
-            const requestLogs = [ {
-                id: 1,
-                timestamp: Date.now(),
-                request: `
-                    GET /abcdefghijklmnopqrstuvwxyz HTTP/1.1
-                    Host: localhost:3000
-                    Accept: application/json`,
-                response: `
-                    HTTP/1.1 200 OK
-                    Content-Type: application/json
-                    Content-Length: 100
-                    Cache-Control: public, max-age=10000
-                    ETag: w/ak3i2hsh8idk3os392
-
-                    {"title": "Hello World"}`
-            }, {
-                id: 2,
-                timestamp: Date.now(),
-                request: `
-                    GET /abcdefghijklmnopqrstuvwxyz HTTP/1.1
-                    Host: localhost:3000
-                    Accept: application/json`
-            }, {
-                id: 3,
-                timestamp: Date.now(),
-                request: `
-                    GET /abcdefghijklmnopqrstuvwxyz HTTP/1.1
-                    Host: localhost:3000
-                    Accept: application/json`,
-                response: `
-                    HTTP/1.1 200 OK
-                    Content-Type: application/json
-                    Content-Length: 100
-                    Cache-Control: public, max-age=10000
-                    ETag: w/ak3i2hsh8idk3os392
-
-                    {"title": "Hello World"}`
-            }, {
-                id: 4,
-                timestamp: Date.now(),
-                request: `
-                    GET /abcdefghijklmnopqrstuvwxyz HTTP/1.1
-                    Host: localhost:3000
-                    Accept: application/json`,
-                response: 'HTTP/1.1 500 Internal Server Error'
-            } ];
+        async fetchRequestLogs(context) {
+            const logsEndpoint = `/${context.state.hash}/logs`;
+            const requestLogs = await fetch(logsEndpoint).then(response => response.json());
             context.commit('setRequestLogs', requestLogs);
         },
 
