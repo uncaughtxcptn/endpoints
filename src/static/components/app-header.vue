@@ -8,16 +8,27 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
+
     export default {
+        computed: mapState(['hash']),
+
         methods: {
             async onClick(e) {
                 const response = await fetch('/endpoints').then(response => response.json());
-                this.$router.push({
+                const routeData = {
                     name: 'endpoint-page',
                     params: {
                         hash: response.hash
                     }
-                });
+                };
+
+                if (this.hash) {
+                    const route = this.$router.resolve(routeData);
+                    window.open(route.href, '_blank');
+                } else {
+                    this.$router.push(routeData);
+                }
             }
         }
     };
