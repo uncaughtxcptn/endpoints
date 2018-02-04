@@ -58,6 +58,11 @@ export default new Vuex.Store({
                 id,
                 updateData: { response: responseString }
             });
+        },
+
+        setAutoResponse(context, response) {
+            // TODO: Send response to backend.
+            console.log(response);
         }
     }
 });
