@@ -4,8 +4,8 @@
             <h2>{{ baseUrl }}/<span>{{ hash }}</span></h2>
         </header>
         <div class="switches">
-            <labelled-switch label="Live"></labelled-switch>
-            <labelled-switch label="Auto Response"></labelled-switch>
+            <labelled-switch label="Live" :checked="true"></labelled-switch>
+            <labelled-switch label="Auto Response" :checked="true"></labelled-switch>
         </div>
     </section>
 </template>
