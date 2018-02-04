@@ -4,8 +4,8 @@
             <h2>{{ baseUrl }}/<span>{{ hash }}</span></h2>
         </header>
         <div class="switches">
-            <labelled-switch label="Live" :checked="true"></labelled-switch>
-            <labelled-switch label="Auto Response" :checked="true"></labelled-switch>
+            <labelled-switch label="Live" :checked="isLive" @change="onIsLiveChange"></labelled-switch>
+            <labelled-switch label="Auto Response" :checked="autoResponse" @change="onAutoResponseChange"></labelled-switch>
         </div>
 
         <response-form></response-form>
@@ -16,7 +16,24 @@
     import { mapState } from 'vuex';
 
     export default {
+        data() {
+            return {
+                isLive: true,
+                autoResponse: true
+            };
+        },
+
         computed: mapState(['baseUrl', 'hash']),
+
+        methods: {
+            onIsLiveChange(isLive) {
+                this.isLive = isLive;
+            },
+
+            onAutoResponseChange(autoResponse) {
+                this.autoResponse = autoResponse;
+            }
+        },
 
         components: {
             'labelled-switch': require('./labelled-switch.vue').default,
