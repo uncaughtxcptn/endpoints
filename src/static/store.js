@@ -32,6 +32,7 @@ export default new Vuex.Store({
         fetchRequestLogs(context) {
             // TODO: Request logs should be fetched from the backend.
             const requestLogs = [ {
+                id: 1,
                 timestamp: Date.now(),
                 request: `
                     GET /abcdefghijklmnopqrstuvwxyz HTTP/1.1
@@ -46,12 +47,14 @@ export default new Vuex.Store({
 
                     {"title": "Hello World"}`
             }, {
+                id: 2,
                 timestamp: Date.now(),
                 request: `
                     GET /abcdefghijklmnopqrstuvwxyz HTTP/1.1
                     Host: localhost:3000
                     Accept: application/json`
             }, {
+                id: 3,
                 timestamp: Date.now(),
                 request: `
                     GET /abcdefghijklmnopqrstuvwxyz HTTP/1.1
@@ -66,6 +69,7 @@ export default new Vuex.Store({
 
                     {"title": "Hello World"}`
             }, {
+                id: 4,
                 timestamp: Date.now(),
                 request: `
                     GET /abcdefghijklmnopqrstuvwxyz HTTP/1.1
