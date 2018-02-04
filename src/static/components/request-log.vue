@@ -8,7 +8,8 @@
         </header>
 
         <request-details class="section" v-if="isExpanded" :data="data.request"></request-details>
-        <response-details class="section" v-if="isExpanded" :data="data.response"></response-details>
+        <response-details class="section" v-if="isExpanded && data.response" :data="data.response"></response-details>
+        <response-form class="section" v-if="isExpanded && !data.response"></response-form>
     </section>
 </template>
 
@@ -60,7 +61,8 @@
 
         components: {
             'request-details': require('./request-details.vue').default,
-            'response-details': require('./response-details.vue').default
+            'response-details': require('./response-details.vue').default,
+            'response-form': require('./response-form.vue').default
         }
     };
 </script>
