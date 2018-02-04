@@ -25,11 +25,11 @@
                 <td class="actions"></td>
             </tr>
 
-            <tr v-for="header in headers">
+            <tr v-for="(header, index) in headers">
                 <td><input type="text" v-model="header.name"></td>
                 <td><input type="text" v-model="header.value"></td>
                 <td class="actions">
-                    <button class="remove-btn" type="button">&times;</button>
+                    <button class="remove-btn" type="button" @click="removeHeader(index)">&times;</button>
                 </td>
             </tr>
 
@@ -76,6 +76,10 @@
 
             addHeader() {
                 this.headers = [...this.headers, { name: null, value: null }];
+            },
+
+            removeHeader(index) {
+                this.headers = this.headers.filter((header, i) => i !== index);
             }
         }
     };
