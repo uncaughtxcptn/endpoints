@@ -23,6 +23,17 @@ export default new Vuex.Store({
             state.requestLogs = requestLogs;
         },
 
+        updateRequestLog(state, { id, updateData }) {
+            const index = state.requestLogs.findIndex(requestLog => requestLog.id === id);
+            const requestLog = state.requestLogs[index];
+            const requestLogKeys = Object.keys(requestLog);
+            const baseData = requestLogKeys.reduce((data, key) => {
+                data[key] = requestLog[key];
+                return data;
+            }, {});
+            Vue.set(state.requestLogs, index, Object.assign(baseData, updateData));
+        },
+
         unsetRequestLogs(state) {
             state.requestLogs = [];
         }
@@ -82,18 +93,16 @@ export default new Vuex.Store({
 
         setResponse(context, { id, response }) {
             // TODO: Response should be sent to the backend.
-            const requestLogs = context.state.requestLogs.map(requestLog => {
-                if (requestLog.id !== id) return requestLog;
-
-                let responseString = `
-                    HTTP/1.1 ${response.statusCode} OK
-                    ${response.headers.map(h => h.name + ':' + h.value).join('\n')}`;
-                if (response.responseBody) {
-                    responseString += '\n\n' + response.responseBody;
-                }
-                return Object.assign(requestLog, { response: responseString });
+            let responseString = `
+                HTTP/1.1 ${response.statusCode} OK
+                ${response.headers.map(h => h.name + ':' + h.value).join('\n')}`;
+            if (response.responseBody) {
+                responseString += '\n\n' + response.responseBody;
+            }
+            context.commit('updateRequestLog', {
+                id,
+                updateData: { response: responseString }
             });
-            context.commit('setRequestLogs', requestLogs);
         }
     }
 });
