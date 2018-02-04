@@ -10,13 +10,13 @@
 <script>
     export default {
         methods: {
-            onClick(e) {
-                // TODO: Get actual endpoint id/hash from backend.
-                const hash = 'abcdefghijklmnopqrstuvwxyz';
-
+            async onClick(e) {
+                const response = await fetch('/endpoints').then(response => response.json());
                 this.$router.push({
                     name: 'endpoint-page',
-                    params: { hash }
+                    params: {
+                        hash: response.hash
+                    }
                 });
             }
         }
