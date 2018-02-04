@@ -1,6 +1,6 @@
 <template>
     <label class="labelled-switch">
-        <base-switch :checked="checked"></base-switch>
+        <base-switch :checked="checked" @change="onChange"></base-switch>
         <span>{{ label }}</span>
     </label>
 </template>
@@ -8,6 +8,12 @@
 <script>
     export default {
         props: ['checked', 'label'],
+
+        methods: {
+            onChange(isChecked) {
+                this.$emit('change', isChecked);
+            }
+        },
 
         components: {
             'base-switch': require('./base-switch.vue').default

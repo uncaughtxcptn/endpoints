@@ -15,6 +15,12 @@
             };
         },
 
+        watch: {
+            isChecked(isChecked) {
+                this.$emit('change', isChecked);
+            }
+        },
+
         methods: {
             toggle() {
                 this.isChecked = !this.isChecked;
