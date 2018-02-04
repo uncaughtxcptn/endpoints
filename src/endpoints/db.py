@@ -22,6 +22,8 @@ class Endpoint(Base):
 
     access_logs = relationship(
         'AccessLog', back_populates='endpoint', cascade='all, delete')
+    responses = relationship(
+        'Response', back_populates='endpoint', cascade='all, delete')
 
     def __repr__(self):
         return '<Endpoint(id="{}", hash="")>'.format(self.id, self.hash)
@@ -38,7 +40,22 @@ class AccessLog(Base):
     endpoint = relationship('Endpoint', back_populates='access_logs')
 
     def __repr__(self):
-        return '<AccessLog(id="{}", endpoint="")>'.format(
+        return '<AccessLog(id="{}", endpoint="{}")>'.format(
+            self.id, self.endpoint)
+
+
+class Response(Base):
+    __tablename__ = 'response'
+    id = Column(Integer, primary_key=True)
+    headers = Column(Text, default='{}')
+    status_code = Column(Integer, default=200)
+    body = Column(Text, default='')
+    endpoint_id = Column(Integer, ForeignKey('endpoint.id'))
+
+    endpoint = relationship('Endpoint', back_populates='responses')
+
+    def __repr__(self):
+        return '<Response(id="{}", endpoint="{}")>'.format(
             self.id, self.endpoint)
 
 
@@ -53,7 +70,8 @@ async def delete_tables(pg, tables):
 
 
 async def prepare_tables(pg):
-    tables = [Endpoint.__table__, AccessLog.__table__]
+    tables = [Endpoint.__table__, AccessLog.__table__, Response.__table__]
+    # await delete_tables(pg, tables)
     async with pg.acquire() as conn:
         for table in tables:
             try:
