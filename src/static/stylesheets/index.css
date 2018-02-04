@@ -8,8 +8,15 @@
 :root {
     --primary-color: #2196f3;
     --primary-color-dark-1: #1976d2;
+    --primary-text-color: #333;
+
+    --success-color: #4caf50;
+    --warning-color: #ffc107;
+    --error-color: #f44336;
 
     --gray-1: #eee;
+    --gray-2: #bbb;
+    --gray-3: #888;
 }
 
 html {
@@ -22,7 +29,7 @@ body {
     font-size: 1.6rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #333;
+    color: var(--primary-text-color);
 }
 
 a,
@@ -37,4 +44,5 @@ button {
 
 .wrapper {
     width: 80rem;
+    margin: 0 auto;
 }
