@@ -40,6 +40,7 @@
 
         beforeRouteLeave(to, from, next) {
             store.commit('unsetHash');
+            store.commit('unsetRequestLogs');
             next();
         }
     };
