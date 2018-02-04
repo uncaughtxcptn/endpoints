@@ -2,6 +2,7 @@
     <section class="request-log">
         <header class="section" @click="toggleExpanded">
             <p class="method">{{ method }}</p>
+            <p class="status">{{ status }}</p>
             <time class="timestamp" :datetime="data.timestamp">{{ date }}</time>
         </header>
 
@@ -25,6 +26,12 @@
         computed: {
             method() {
                 return this.data.request.trim().match(/^[A-Z]+/)[0];
+            },
+
+            status() {
+                return this.data.response
+                    ? this.data.response.trim().match(/\d+ [a-zA-Z\s]+(?=\n|$)/)[0]
+                    : null;
             },
 
             date() {
@@ -60,8 +67,15 @@
 
     header {
         display: flex;
-        justify-content: space-between;
         padding: 0.4rem 0.8rem;
         cursor: pointer;
+    }
+
+    .method {
+        margin-right: 1.6rem;
+    }
+
+    .timestamp {
+        margin-left: auto;
     }
 </style>
