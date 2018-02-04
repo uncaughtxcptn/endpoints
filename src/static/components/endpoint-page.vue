@@ -53,4 +53,12 @@
     .request-logs {
         margin-top: 5rem;
     }
+
+    .request-log:not(:first-of-type) {
+        margin-top: 0.8rem;
+    }
+
+    .request-log:not(:last-of-type) {
+        margin-top: 0.8rem;
+    }
 </style>
