@@ -8,7 +8,7 @@
             <labelled-switch label="Auto Response" :checked="autoResponse" @change="onAutoResponseChange"></labelled-switch>
         </div>
 
-        <response-form></response-form>
+        <response-form v-if="autoResponse"></response-form>
     </section>
 </template>
 
