@@ -45,7 +45,7 @@
             <tr>
                 <td colspan="3" class="form-actions">
                     <button class="send-btn">Send Response</button>
-                    <button type="button">Add Header</button>
+                    <button type="button" @click="addHeader">Add Header</button>
                 </td>
             </tr>
         </table>
@@ -72,6 +72,10 @@
             statusCodeGroup(min, max) {
                 return this.statusCodeChoices
                     .filter(choice => choice.code >= min && choice.code <= max);
+            },
+
+            addHeader() {
+                this.headers = [...this.headers, { name: null, value: null }];
             }
         }
     };
