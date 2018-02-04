@@ -7,7 +7,12 @@
 
 <script>
     export default {
-        props: ['checked'],
+        props: {
+            checked: {
+                type: Boolean,
+                default: false
+            }
+        },
 
         data() {
             return {
