@@ -6,16 +6,7 @@
         </header>
 
         <request-details class="section" v-if="isExpanded" :data="data.request"></request-details>
-
-        <div v-if="isExpanded" class="section response-details">
-            <p>HTTP/1.1 200 OK</p>
-            <p>Content-Type: application-json</p>
-            <p>Content-Length: 100</p>
-            <p>Cache-Control: public, max-age=10000</p>
-            <p>Etag: w/kdi283lsldjlsjds</p>
-            <br>
-            <p>{"title":"Hello World"}</p>
-        </div>
+        <response-details class="section" v-if="isExpanded" :data="data.response"></response-details>
     </section>
 </template>
 
@@ -45,7 +36,8 @@
         },
 
         components: {
-            'request-details': require('./request-details.vue').default
+            'request-details': require('./request-details.vue').default,
+            'response-details': require('./response-details.vue').default
         }
     };
 </script>
@@ -67,9 +59,5 @@
         justify-content: space-between;
         padding: 0.4rem 0.8rem;
         cursor: pointer;
-    }
-
-    .response-details {
-        padding: 0.4rem 0.8rem;
     }
 </style>
