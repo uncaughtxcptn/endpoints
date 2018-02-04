@@ -59,6 +59,6 @@
     }
 
     .request-log:not(:last-of-type) {
-        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
     }
 </style>
