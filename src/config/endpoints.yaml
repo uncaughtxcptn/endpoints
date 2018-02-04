@@ -1,0 +1,6 @@
+database:
+  name: endpoint
+  user: eman
+  password: ''
+  host: localhost
+  port: ''

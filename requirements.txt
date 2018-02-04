@@ -1,5 +1,6 @@
 aiohttp==2.3.10
 aiohttp-jinja2==0.15.0
+aiopg==0.13.2
 async-timeout==2.0.0
 chardet==3.0.4
 idna==2.6
@@ -7,5 +8,7 @@ idna-ssl==1.0.0
 Jinja2==2.10
 MarkupSafe==1.0
 multidict==4.1.0
+psycopg2==2.7.3.2
+PyYAML==3.12
+SQLAlchemy==1.2.2
 yarl==1.1.0
-pyyaml
