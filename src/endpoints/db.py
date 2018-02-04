@@ -2,9 +2,11 @@ from aiopg.sa import create_engine
 
 import datetime
 
+import psycopg2
+
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (
-    Column, Integer, String, DateTime, Sequence, ForeignKey, Text)
+    Column, Integer, String, DateTime, ForeignKey, Text)
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import CreateTable, DropTable
 
@@ -14,7 +16,7 @@ Base = declarative_base()
 
 class Endpoint(Base):
     __tablename__ = 'endpoint'
-    id = Column(Integer, Sequence('endpoint_id_seq'), primary_key=True)
+    id = Column(Integer, primary_key=True)
     hash = Column(String(256), unique=True)
     when = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
 
@@ -27,7 +29,7 @@ class Endpoint(Base):
 
 class AccessLog(Base):
     __tablename__ = 'access_log'
-    id = Column(Integer, Sequence('access_log_id_seq'), primary_key=True)
+    id = Column(Integer, primary_key=True)
     request = Column(Text, default='')
     response = Column(Text, default='')
     endpoint_id = Column(Integer, ForeignKey('endpoint.id'))
@@ -45,18 +47,20 @@ async def delete_tables(pg, tables):
         for table in reversed(tables):
             drop_expr = DropTable(table)
             try:
-                await conn.execute(drop_expr)
-            except:
+                return await conn.execute(drop_expr)
+            except psycopg2.ProgrammingError:
                 pass
 
 
 async def prepare_tables(pg):
     tables = [Endpoint.__table__, AccessLog.__table__]
-    await delete_tables(pg, tables)
     async with pg.acquire() as conn:
         for table in tables:
-            create_expr = CreateTable(table)
-            await conn.execute(create_expr)
+            try:
+                create_expr = CreateTable(table)
+                await conn.execute(create_expr)
+            except psycopg2.ProgrammingError:
+                pass
 
 
 async def init_pg(app):
