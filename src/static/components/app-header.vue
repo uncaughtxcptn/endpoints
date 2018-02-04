@@ -8,16 +8,27 @@
 </template>
 
 <script>
-    export default {
-        methods: {
-            onClick(e) {
-                // TODO: Get actual endpoint id/hash from backend.
-                const hash = 'abcdefghijklmnopqrstuvwxyz';
+    import { mapState } from 'vuex';
 
-                this.$router.push({
+    export default {
+        computed: mapState(['hash']),
+
+        methods: {
+            async onClick(e) {
+                const response = await fetch('/endpoints').then(response => response.json());
+                const routeData = {
                     name: 'endpoint-page',
-                    params: { hash }
-                });
+                    params: {
+                        hash: response.hash
+                    }
+                };
+
+                if (this.hash) {
+                    const route = this.$router.resolve(routeData);
+                    window.open(route.href, '_blank');
+                } else {
+                    this.$router.push(routeData);
+                }
             }
         }
     };
