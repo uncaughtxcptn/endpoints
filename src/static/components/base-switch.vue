@@ -1,8 +1,8 @@
 <template>
-    <span class="base-switch">
-        <input type="checkbox" :checked="isChecked">
-        <span class="switch" @click="toggle"></span>
-    </span>
+    <label class="base-switch">
+        <input type="checkbox" v-model="isChecked">
+        <span class="switch"></span>
+    </label>
 </template>
 
 <script>
@@ -16,14 +16,12 @@
         },
 
         watch: {
+            checked(checked) {
+                this.isChecked = checked;
+            },
+
             isChecked(isChecked) {
                 this.$emit('change', isChecked);
-            }
-        },
-
-        methods: {
-            toggle() {
-                this.isChecked = !this.isChecked;
             }
         }
     };

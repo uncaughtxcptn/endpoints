@@ -5,6 +5,7 @@
         </header>
         <div class="switches">
             <labelled-switch label="Live"></labelled-switch>
+            <labelled-switch label="Auto Response"></labelled-switch>
         </div>
     </section>
 </template>
@@ -39,5 +40,9 @@
 
     .labelled-switch {
         text-transform: uppercase;
+    }
+
+    .labelled-switch:not(:last-child) {
+        margin-right: 0.8rem;
     }
 </style>

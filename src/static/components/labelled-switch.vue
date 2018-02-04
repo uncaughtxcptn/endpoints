@@ -1,17 +1,33 @@
 <template>
-    <label class="labelled-switch">
-        <base-switch :checked="checked" @change="onChange"></base-switch>
-        <span>{{ label }}</span>
-    </label>
+    <span class="labelled-switch" @click="toggle">
+        <base-switch :checked="isChecked" @change="onChange"></base-switch>
+        <span class="label">{{ label }}</span>
+    </span>
 </template>
 
 <script>
     export default {
         props: ['checked', 'label'],
 
+        data() {
+            return {
+                isChecked: this.checked
+            };
+        },
+
+        watch: {
+            isChecked(isChecked) {
+                this.$emit('change', isChecked);
+            }
+        },
+
         methods: {
             onChange(isChecked) {
-                this.$emit('change', isChecked);
+                this.isChecked = isChecked;
+            },
+
+            toggle() {
+                this.isChecked = !this.isChecked;
             }
         },
 
@@ -32,7 +48,7 @@
         margin-right: 0.4rem;
     }
 
-    span {
+    .label {
         font-size: 0.8em;
     }
 </style>
