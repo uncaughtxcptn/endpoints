@@ -78,6 +78,22 @@ export default new Vuex.Store({
                 response: 'HTTP/1.1 500 Internal Server Error'
             } ];
             context.commit('setRequestLogs', requestLogs);
+        },
+
+        setResponse(context, { id, response }) {
+            // TODO: Response should be sent to the backend.
+            const requestLogs = context.state.requestLogs.map(requestLog => {
+                if (requestLog.id !== id) return requestLog;
+
+                let responseString = `
+                    HTTP/1.1 ${response.statusCode} OK
+                    ${response.headers.map(h => h.name + ':' + h.value).join('\n')}`;
+                if (response.responseBody) {
+                    responseString += '\n\n' + response.responseBody;
+                }
+                return Object.assign(requestLog, { response: responseString });
+            });
+            context.commit('setRequestLogs', requestLogs);
         }
     }
 });
