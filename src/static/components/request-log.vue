@@ -3,6 +3,7 @@
         <header class="section" @click="toggleExpanded">
             <p class="method">{{ method }}</p>
             <p v-if="status" class="status" :class="getStatusCodeClass(status)">{{ status }}</p>
+            <p v-else class="no-status">No Response</p>
             <time class="timestamp" :datetime="data.timestamp">{{ date }}</time>
         </header>
 
@@ -54,7 +55,6 @@
                 } else {
                     return 'status-error';
                 }
-
             }
         },
 
@@ -97,6 +97,14 @@
 
     .status-error {
         color: var(--error-color);
+    }
+
+    .no-status {
+        padding: 0 0.4rem;
+        border-radius: 2px;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: var(--error-color);
     }
 
     .timestamp {
