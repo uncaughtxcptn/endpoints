@@ -2,7 +2,7 @@
     <section class="request-log">
         <header class="section" @click="toggleExpanded">
             <p class="method">{{ method }}</p>
-            <p class="status">{{ status }}</p>
+            <p v-if="status" class="status" :class="getStatusCodeClass(status)">{{ status }}</p>
             <time class="timestamp" :datetime="data.timestamp">{{ date }}</time>
         </header>
 
@@ -43,6 +43,18 @@
         methods: {
             toggleExpanded() {
                 this.isExpanded = !this.isExpanded;
+            },
+
+            getStatusCodeClass(status) {
+                const statusCode = parseInt(status.match(/^\d+/), 10);
+                if (statusCode < 400) {
+                    return 'status-success';
+                } else if (statusCode < 500) {
+                    return 'status-warning';
+                } else {
+                    return 'status-error';
+                }
+
             }
         },
 
@@ -73,6 +85,18 @@
 
     .method {
         margin-right: 1.6rem;
+    }
+
+    .status-success {
+        color: var(--success-color);
+    }
+
+    .status-warning {
+        color: var(--warning-color);
+    }
+
+    .status-error {
+        color: var(--error-color);
     }
 
     .timestamp {
