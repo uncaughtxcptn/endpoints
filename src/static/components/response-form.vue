@@ -115,7 +115,7 @@
     }
 
     td.actions {
-        width: 2.3rem;
+        width: 2.2rem;
     }
 
     td.form-actions {
