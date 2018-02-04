@@ -9,7 +9,7 @@
 
         <request-details class="section" v-if="isExpanded" :data="data.request"></request-details>
         <response-details class="section" v-if="isExpanded && data.response" :data="data.response"></response-details>
-        <response-form class="section" v-if="isExpanded && !data.response"></response-form>
+        <response-form class="section" v-if="isExpanded && !data.response" @submit="onResponse"></response-form>
     </section>
 </template>
 
@@ -56,6 +56,13 @@
                 } else {
                     return 'status-error';
                 }
+            },
+
+            onResponse(response) {
+                this.$store.dispatch('setResponse', {
+                    id: this.data.id,
+                    response
+                });
             }
         },
 
