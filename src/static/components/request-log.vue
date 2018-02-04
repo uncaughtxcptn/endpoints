@@ -1,7 +1,7 @@
 <template>
     <section class="request-log">
         <header class="section" @click="toggleExpanded">
-            <p class="method">GET</p>
+            <p class="method">{{ method }}</p>
             <time class="timestamp" :datetime="data.timestamp">{{ date }}</time>
         </header>
 
@@ -23,6 +23,10 @@
         },
 
         computed: {
+            method() {
+                return this.data.request.trim().match(/^[A-Z]+/)[0];
+            },
+
             date() {
                 const date = new Date(this.data.timestamp);
                 return format(date, 'MMM D, YYYY hh:mm:ss A');
