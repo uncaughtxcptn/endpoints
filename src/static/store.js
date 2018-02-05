@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        baseUrl: process.env.BASE_URL || 'localhost:3000',
+        baseUrl: process.env.BASE_URL || 'localhost:8080',
         hash: null,
         requestLogs: []
     },
