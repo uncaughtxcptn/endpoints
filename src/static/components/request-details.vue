@@ -13,7 +13,7 @@
 
         computed: {
             lines() {
-                return this.data.trim().split(/\n/g).map(line => line.trim());
+                return this.data.split(/\n/g);
             }
         }
     };
