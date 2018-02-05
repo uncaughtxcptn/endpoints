@@ -2,7 +2,7 @@
     <section class="endpoint-header">
         <header>
             <h2>{{ baseUrl }}/<span>{{ hash }}</span></h2>
-            <button class="copy-btn"></button>
+            <button class="copy-btn" @click="copyEndpoint"></button>
         </header>
         <div class="switches">
             <labelled-switch label="Live" :checked="isLive" @change="onIsLiveChange"></labelled-switch>
@@ -15,6 +15,7 @@
 
 <script>
     import { mapState } from 'vuex';
+    import { copy } from '../lib/clipboard';
 
     export default {
         data() {
@@ -54,6 +55,11 @@
                     formData.set(key, value);
                 });
                 return formData;
+            },
+
+            copyEndpoint() {
+                const endpoint = this.baseUrl + '/' + this.hash;
+                copy(endpoint);
             }
         },
 
