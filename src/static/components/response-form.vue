@@ -53,11 +53,9 @@
 </template>
 
 <script>
-    import HttpChoicesMixin from '../mixins/http-choices';
+    import { httpStatusCodes } from '../lib/http-choices';
 
     export default {
-        mixins: [HttpChoicesMixin],
-
         data() {
             return {
                 form: {
@@ -72,8 +70,7 @@
 
         methods: {
             statusCodeGroup(min, max) {
-                return this.statusCodeChoices
-                    .filter(choice => choice.code >= min && choice.code <= max);
+                return httpStatusCodes.filter(choice => choice.code >= min && choice.code <= max);
             },
 
             addHeader() {
