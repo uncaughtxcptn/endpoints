@@ -93,6 +93,7 @@
     }
 
     .method {
+        min-width: 7ch;
         margin-right: 1.6rem;
     }
 
