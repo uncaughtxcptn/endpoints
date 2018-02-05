@@ -22,5 +22,10 @@ module.exports = {
                 name: '[name].[ext]'
             }
         } ]
+    },
+    resolve: {
+        alias: {
+            images: path.resolve(__dirname, 'src/static/images')
+        }
     }
 };
