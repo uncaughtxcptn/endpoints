@@ -7,7 +7,8 @@ export default new Vuex.Store({
     state: {
         baseUrl: process.env.BASE_URL || 'localhost:8080',
         hash: null,
-        requestLogs: []
+        requestLogs: [],
+        bufferedRequestLogs: []
     },
 
     mutations: {
@@ -35,7 +36,7 @@ export default new Vuex.Store({
         },
 
         insertRequestLog(state, requestLog) {
-            state.requestLogs = [requestLog, ...state.requestLogs];
+            state.bufferedRequestLogs = [requestLog, ...state.bufferedRequestLogs];
         },
 
         unsetRequestLogs(state) {
