@@ -4,6 +4,7 @@
 
         <div class="wrapper">
             <endpoint-header></endpoint-header>
+            <pending-counter :count="bufferedRequestLogsCount"></pending-counter>
 
             <div class="request-logs">
                 <request-log
@@ -17,15 +18,19 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapState, mapGetters } from 'vuex';
     import store from '../store';
 
     export default {
-        computed: mapState(['requestLogs']),
+        computed: Object.assign({},
+            mapState(['requestLogs']),
+            mapGetters(['bufferedRequestLogsCount'])
+        ),
 
         components: {
             'app-header': require('./app-header.vue').default,
             'endpoint-header': require('./endpoint-header.vue').default,
+            'pending-counter': require('./pending-counter.vue').default,
             'request-log': require('./request-log.vue').default
         },
 
@@ -51,8 +56,8 @@
         padding: 5rem 0;
     }
 
-    .request-logs {
-        margin-top: 5rem;
+    .endpoint-header {
+        margin-bottom: 5rem;
     }
 
     .request-log:not(:first-of-type) {
