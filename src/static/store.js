@@ -34,6 +34,10 @@ export default new Vuex.Store({
             Vue.set(state.requestLogs, index, Object.assign(baseData, updateData));
         },
 
+        insertRequestLog(state, requestLog) {
+            state.requestLogs = [requestLog, ...state.requestLogs];
+        },
+
         unsetRequestLogs(state) {
             state.requestLogs = [];
         }
