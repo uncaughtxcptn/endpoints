@@ -7,7 +7,14 @@ export default new Vuex.Store({
     state: {
         baseUrl: process.env.BASE_URL || 'localhost:8080',
         hash: null,
-        requestLogs: []
+        requestLogs: [],
+        bufferedRequestLogs: []
+    },
+
+    getters: {
+        bufferedRequestLogsCount(state) {
+            return state.bufferedRequestLogs.length;
+        }
     },
 
     mutations: {
@@ -32,6 +39,15 @@ export default new Vuex.Store({
                 return data;
             }, {});
             Vue.set(state.requestLogs, index, Object.assign(baseData, updateData));
+        },
+
+        insertRequestLog(state, requestLog) {
+            state.bufferedRequestLogs = [requestLog, ...state.bufferedRequestLogs];
+        },
+
+        flushRequestLogs(state) {
+            state.requestLogs = [...state.bufferedRequestLogs, ...state.requestLogs];
+            state.bufferedRequestLogs = [];
         },
 
         unsetRequestLogs(state) {
