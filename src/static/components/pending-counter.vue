@@ -1,5 +1,5 @@
 <template>
-    <button class="pending-counter" v-if="count">{{ count }} New Request Logs</button>
+    <button class="pending-counter" v-if="count" @click="onClick">{{ count }} New Request Logs</button>
 </template>
 
 <script>
@@ -8,6 +8,12 @@
             count: {
                 type: Number,
                 default: 0
+            }
+        },
+
+        methods: {
+            onClick(e) {
+                this.$emit('click', e);
             }
         }
     };
