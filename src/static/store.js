@@ -11,6 +11,12 @@ export default new Vuex.Store({
         bufferedRequestLogs: []
     },
 
+    getters: {
+        bufferedRequestLogsCount(state) {
+            return state.bufferedRequestLogs.length;
+        }
+    },
+
     mutations: {
         setHash(state, hash) {
             state.hash = hash;
