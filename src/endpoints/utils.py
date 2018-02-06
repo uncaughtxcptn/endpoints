@@ -10,8 +10,11 @@ from sqlalchemy import desc
 
 
 def load_config(fname):
-    with open(fname, 'rt') as f:
-        data = yaml.load(f)
+    try:
+        with open(fname, 'rt') as f:
+            data = yaml.load(f)
+    except FileNotFoundError:
+        data = None
     return data
 
 
