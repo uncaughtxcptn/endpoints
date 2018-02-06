@@ -45,6 +45,11 @@ export default new Vuex.Store({
             state.bufferedRequestLogs = [requestLog, ...state.bufferedRequestLogs];
         },
 
+        flushRequestLogs(state) {
+            state.requestLogs = [...state.bufferedRequestLogs, ...state.requestLogs];
+            state.bufferedRequestLogs = [];
+        },
+
         unsetRequestLogs(state) {
             state.requestLogs = [];
         }
