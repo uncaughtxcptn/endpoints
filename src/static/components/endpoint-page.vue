@@ -42,6 +42,10 @@
 
         mounted() {
             this.$store.dispatch('fetchRequestLogs');
+
+            setInterval(() => {
+                this.$store.commit('insertRequestLog', this.requestLogs[this.requestLogs.length - 1]);
+            }, 1000);
         },
 
         beforeRouteEnter(to, from, next) {
