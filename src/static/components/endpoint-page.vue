@@ -4,7 +4,7 @@
 
         <div class="wrapper">
             <endpoint-header></endpoint-header>
-            <pending-counter :count="bufferedRequestLogsCount"></pending-counter>
+            <pending-counter :count="bufferedRequestLogsCount" @click="flushRequestLogs"></pending-counter>
 
             <div class="request-logs">
                 <request-log
@@ -26,6 +26,12 @@
             mapState(['requestLogs']),
             mapGetters(['bufferedRequestLogsCount'])
         ),
+
+        methods: {
+            flushRequestLogs() {
+                this.$store.commit('flushRequestLogs');
+            }
+        },
 
         components: {
             'app-header': require('./app-header.vue').default,
