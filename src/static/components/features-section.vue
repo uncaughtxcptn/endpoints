@@ -5,13 +5,13 @@
 
             <div class="features">
                 <div class="feature">
-                    <div class="img-placeholder"></div>
+                    <img src="~images/feature-1.png" alt="Realtime Request Logs">
                     <h4>Realtime Request Logs</h4>
                     <p>See HTTP requests sent to your endpoint in realtime.</p>
                 </div>
 
                 <div class="feature">
-                    <div class="img-placeholder"></div>
+                    <img src="~images/feature-2.png" alt="Customizeable Responses">
                     <h4>Customizeable Responses</h4>
                     <p>Respond with custom status codes, response headers, and body.</p>
                 </div>
@@ -45,14 +45,16 @@
         text-align: center;
     }
 
-    .img-placeholder {
-        background-color: var(--gray-1);
+    img {
+        padding: 3px;
+        border: 1px solid var(--gray-1);
+        border-radius: 2px;
+        opacity: 0.5;
+        transition: opacity 200ms ease;
     }
 
-    .img-placeholder::before {
-        content: "";
-        display: block;
-        padding-top: calc(100% / 16 * 5);
+    .feature:hover img {
+        opacity: 1;
     }
 
     h4 {
