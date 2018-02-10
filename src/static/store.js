@@ -46,6 +46,10 @@ export default new Vuex.Store({
             state.isLive = isLive;
         },
 
+        setAutoResponse(state, autoResponse) {
+            state.autoResponse = autoResponse;
+        },
+
         setRequestLogs(state, requestLogs) {
             state.requestLogs = requestLogs;
         },
@@ -136,6 +140,7 @@ export default new Vuex.Store({
                 method: 'POST',
                 body: objectToFormData(data)
             }).then(response => response.json());
+            context.commit('setAutoResponse', data);
 
             this.$ga.event('endpoints', 'set-auto-response');
         },
