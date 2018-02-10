@@ -1,6 +1,6 @@
 <template>
-    <span class="labelled-switch" @click="toggle">
-        <base-switch :checked="isChecked" @change="onChange"></base-switch>
+    <span class="labelled-switch" :class="{ disabled }" @click="toggle">
+        <base-switch :checked="isChecked" :disabled="disabled" @change="onChange"></base-switch>
         <span class="label">{{ label }}</span>
     </span>
 </template>
@@ -9,6 +9,10 @@
     export default {
         props: {
             checked: {
+                type: Boolean,
+                default: false
+            },
+            disabled: {
                 type: Boolean,
                 default: false
             },
@@ -33,7 +37,9 @@
             },
 
             toggle() {
-                this.isChecked = !this.isChecked;
+                if (!this.disabled) {
+                    this.isChecked = !this.isChecked;
+                }
             }
         },
 
@@ -56,5 +62,9 @@
 
     .label {
         font-size: 0.8em;
+    }
+
+    .disabled .label {
+        opacity: 0.5;
     }
 </style>
