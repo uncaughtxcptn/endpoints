@@ -7,6 +7,7 @@ export default new Vuex.Store({
     state: {
         baseUrl: process.env.BASE_URL || 'localhost:8080',
         hash: null,
+        isLive: false,
         requestLogs: [],
         bufferedRequestLogs: []
     },
@@ -24,6 +25,10 @@ export default new Vuex.Store({
 
         unsetHash(state) {
             state.hash = null;
+        },
+
+        setLiveStatus(state, isLive) {
+            state.isLive = isLive;
         },
 
         setRequestLogs(state, requestLogs) {
@@ -56,6 +61,12 @@ export default new Vuex.Store({
     },
 
     actions: {
+        async fetchLiveStatus(context) {
+            const statusEndpoint = `/${context.state.hash}/live`;
+            const response = await fetch(statusEndpoint).then(response => response.json());
+            context.commit('setLiveStatus', response.live);
+        },
+
         async fetchRequestLogs(context) {
             const logsEndpoint = `/${context.state.hash}/logs`;
             const requestLogs = await fetch(logsEndpoint).then(response => response.json());
