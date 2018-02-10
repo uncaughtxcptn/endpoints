@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { objectToFormData } from './lib/utils';
 
 Vue.use(Vuex);
 
@@ -65,6 +66,15 @@ export default new Vuex.Store({
             const endpoint = `/${context.state.hash}/live`;
             const response = await fetch(endpoint).then(response => response.json());
             context.commit('setLiveStatus', response.live);
+        },
+
+        async updateLiveStatus(context, isLive) {
+            const endpoint = `/${context.state.hash}/live`;
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: objectToFormData({ live: isLive ? 1 : 0 })
+            });
+            context.commit('setLiveStatus', isLive);
         },
 
         async fetchRequestLogs(context) {
