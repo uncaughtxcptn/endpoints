@@ -43,10 +43,14 @@ async def visit_endpoint(request):
         ws = request.app['sockets'].get(hash_value)
         if ws:
             ws.send_str(json.dumps(
-                {'id': access_log.id,
-                 'request': access_data['request'],
-                 'response': access_data['response'],
-                 'when': datetime.utcnow().isoformat()}))
+                {'type': 'access-log',
+                 'data': {
+                        'id': access_log.id,
+                        'request': access_data['request'],
+                        'response': access_data['response'],
+                        'when': datetime.utcnow().isoformat()
+                        }
+                 }))
         return response_obj
 
 
