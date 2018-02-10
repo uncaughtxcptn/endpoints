@@ -1,7 +1,9 @@
 from aiohttp_jinja2 import template
-from aiohttp import web
+from aiohttp import web, WSMsgType
 
 from db import Endpoint, AccessLog, Response
+
+from datetime import datetime
 
 import json
 
@@ -35,8 +37,16 @@ async def visit_endpoint(request):
             'request': await get_http_request_string(request),
             'response': response_string,
         }
-        await conn.execute(
+        access_log = await conn.execute(
             accesslog_t.insert().values(access_data))
+        access_log = await access_log.fetchone()
+        ws = request.app['sockets'].get(hash_value)
+        if ws:
+            ws.send_str(json.dumps(
+                {'id': access_log.id,
+                 'request': access_data['request'],
+                 'response': access_data['response'],
+                 'when': datetime.utcnow().isoformat()}))
         return response_obj
 
 
@@ -106,3 +116,17 @@ async def set_response_data(request):
             'endpoint_id': endpoint.id}
         await conn.execute(response_t.insert().values(response_data))
     return web.json_response(response_data)
+
+
+async def sockets(request):
+    ws = web.WebSocketResponse()
+    await ws.prepare(request)
+    hash_value = request.match_info['hash']
+    request.app['sockets'][hash_value] = ws
+    async for msg in ws:
+        if msg.type == WSMsgType.TEXT:
+            if msg.data == 'close':
+                await ws.close()
+    del request.app['sockets'][hash_value]
+    print('closing ws connection')
+    return ws

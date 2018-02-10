@@ -13,6 +13,7 @@ from utils import load_config
 app = web.Application()
 conf = load_config(str(Path('.') / 'config' / 'endpoints.yaml'))
 app['config'] = conf
+app['sockets'] = {}
 aiohttp_jinja2.setup(
     app, loader=jinja2.FileSystemLoader('endpoints/templates/'))
 setup_routes(app=app)
