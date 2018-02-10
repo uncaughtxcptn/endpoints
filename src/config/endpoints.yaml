@@ -4,4 +4,4 @@ database:
   password: ''
   host: localhost
   port: ''
-debug: false
+debug: true
