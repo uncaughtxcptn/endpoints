@@ -21,22 +21,15 @@
     export default {
         data() {
             return {
-                isLive: true,
                 autoResponse: true
             };
         },
 
-        computed: mapState(['baseUrl', 'hash']),
-
-        watch: {
-            isLive(isLive) {
-                this.$store.dispatch('updateLiveStatus', isLive);
-            }
-        },
+        computed: mapState(['baseUrl', 'hash', 'isLive']),
 
         methods: {
             onIsLiveChange(isLive) {
-                this.isLive = isLive;
+                this.$store.dispatch('updateLiveStatus', isLive);
             },
 
             onAutoResponseChange(autoResponse) {
