@@ -48,7 +48,10 @@ export default new Vuex.Store({
         },
 
         insertRequestLog(state, requestLog) {
-            state.bufferedRequestLogs = [requestLog, ...state.bufferedRequestLogs];
+            state.bufferedRequestLogs = [
+                Object.assign({}, requestLog, { isExpanded: false }),
+                ...state.bufferedRequestLogs
+            ];
         },
 
         flushRequestLogs(state) {
@@ -79,7 +82,9 @@ export default new Vuex.Store({
 
         async fetchRequestLogs(context) {
             const logsEndpoint = `/${context.state.hash}/logs`;
-            const requestLogs = await fetch(logsEndpoint).then(response => response.json());
+            let requestLogs = await fetch(logsEndpoint).then(response => response.json());
+            requestLogs = requestLogs.map(requestLog =>
+                Object.assign({}, requestLog, { isExpanded: false }));
             context.commit('setRequestLogs', requestLogs);
         },
 

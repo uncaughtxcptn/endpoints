@@ -8,8 +8,8 @@
 
             <div class="request-logs">
                 <request-log
-                    v-for="(requestLog, index) in requestLogs"
-                    :key="index"
+                    v-for="requestLog in requestLogs"
+                    :key="requestLog.id"
                     :data="requestLog">
                 </request-log>
             </div>
