@@ -67,8 +67,8 @@
 
     .switch::before {
         content: "";
-        width: calc(1em - 1px);
-        height: calc(1em - 2px);
+        width: calc(1em - 2px);
+        height: calc(1em - 4px);
         border-radius: 1px;
         position: absolute;
         top: 1px;

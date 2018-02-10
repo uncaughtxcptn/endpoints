@@ -14,6 +14,8 @@
                 </request-log>
             </div>
         </div>
+
+        <app-footer></app-footer>
     </div>
 </template>
 
@@ -35,6 +37,7 @@
 
         components: {
             'app-header': require('./app-header.vue').default,
+            'app-footer': require('./app-footer.vue').default,
             'endpoint-header': require('./endpoint-header.vue').default,
             'pending-counter': require('./pending-counter.vue').default,
             'request-log': require('./request-log.vue').default
@@ -68,6 +71,16 @@
 </script>
 
 <style scoped>
+    .endpoint-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .app-footer {
+        margin-top: auto;
+    }
+
     .wrapper {
         padding: 5rem 0;
     }

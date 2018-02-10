@@ -1,7 +1,7 @@
 *,
 *::before,
 *::after {
-    box-sizing: 0;
+    box-sizing: border-box;
     margin: 0;
 }
 
@@ -14,6 +14,7 @@
     --warning-color: #ffc107;
     --error-color: #f44336;
 
+    --gray-0: #fafafa;
     --gray-1: #eee;
     --gray-2: #bbb;
     --gray-3: #888;
