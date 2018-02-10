@@ -23,7 +23,7 @@
 
     export default {
         computed: Object.assign({},
-            mapState(['requestLogs']),
+            mapState(['hash', 'requestLogs']),
             mapGetters(['bufferedRequestLogsCount'])
         ),
 
@@ -43,9 +43,15 @@
         mounted() {
             this.$store.dispatch('fetchRequestLogs');
 
-            setInterval(() => {
-                this.$store.commit('insertRequestLog', this.requestLogs[this.requestLogs.length - 1]);
-            }, 1000);
+            const wsUrl = `ws://${location.host}/${this.hash}/ws`;
+            const ws = new WebSocket(wsUrl);
+
+            ws.addEventListener('message', e => {
+                const message = JSON.parse(e.data);
+                if (message.type === 'access-log') {
+                    this.$store.commit('insertRequestLog', message.data);
+                }
+            });
         },
 
         beforeRouteEnter(to, from, next) {
