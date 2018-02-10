@@ -17,3 +17,15 @@
         }
     };
 </script>
+
+<style scoped>
+    .landing-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .app-footer {
+        margin-top: auto;
+    }
+</style>
