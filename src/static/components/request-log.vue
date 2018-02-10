@@ -7,9 +7,9 @@
             <time class="timestamp" :datetime="data.timestamp">{{ date }}</time>
         </header>
 
-        <request-details class="section" v-if="isExpanded" :data="data.request"></request-details>
-        <response-details class="section" v-if="isExpanded && data.response" :data="data.response"></response-details>
-        <response-form class="section" v-if="isExpanded && !data.response" @submit="onResponse"></response-form>
+        <request-details class="section" v-if="data.isExpanded" :data="data.request"></request-details>
+        <response-details class="section" v-if="data.isExpanded && data.response" :data="data.response"></response-details>
+        <response-form class="section" v-if="data.isExpanded && !data.response" @submit="onResponse"></response-form>
     </section>
 </template>
 
@@ -18,12 +18,6 @@
 
     export default {
         props: ['data'],
-
-        data() {
-            return {
-                isExpanded: false
-            };
-        },
 
         computed: {
             method() {
@@ -44,7 +38,12 @@
 
         methods: {
             toggleExpanded() {
-                this.isExpanded = !this.isExpanded;
+                this.$store.commit('updateRequestLog', {
+                    id: this.data.id,
+                    updateData: {
+                        isExpanded: !this.data.isExpanded
+                    }
+                });
             },
 
             getStatusCodeClass(status) {
