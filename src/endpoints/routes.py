@@ -15,4 +15,4 @@ def setup_routes(app):
     app.router.add_get('/{hash}/ws', sockets)
     if app['config']['debug']:
         app.router.add_static(
-            '/static/', path=str(Path('.') / 'static'), name='static')
+            '/static/', path=str(Path('..') / 'static'), name='static')
