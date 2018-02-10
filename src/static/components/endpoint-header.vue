@@ -9,7 +9,13 @@
             <labelled-switch label="Auto Response" :checked="autoResponse" :disabled="true" @change="onAutoResponseChange"></labelled-switch>
         </div>
 
-        <response-form v-if="autoResponse" @submit="setAutoResponse"></response-form>
+        <response-form
+            v-if="willAutoResponse"
+            @submit="onAutoResponseSubmit"
+            :status-code="autoResponse.statusCode"
+            :headers="autoResponse.headers"
+            :response-body="autoResponse.responseBody">
+        </response-form>
     </section>
 </template>
 
@@ -20,17 +26,17 @@
     export default {
         data() {
             return {
-                autoResponse: true
+                willAutoResponse: true
             };
         },
 
-        computed: mapState(['baseUrl', 'hash', 'isLive']),
+        computed: mapState(['baseUrl', 'hash', 'isLive', 'autoResponse']),
 
         methods: {
             ...mapActions(['updateLiveStatus', 'setAutoResponse']),
 
             onAutoResponseChange(autoResponse) {
-                this.autoResponse = autoResponse;
+                this.willAutoResponse = autoResponse;
             },
 
             copyEndpoint() {
