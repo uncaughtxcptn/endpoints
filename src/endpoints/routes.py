@@ -1,5 +1,5 @@
 from views import (index, create_endpoint, visit_endpoint, view_access_logs,
-                   set_response_data)
+                   set_response_data, sockets)
 
 from pathlib import Path
 
@@ -11,5 +11,6 @@ def setup_routes(app):
     app.router.add_get('/{hash}/view', index)
     app.router.add_get('/{hash}/logs', view_access_logs)
     app.router.add_post('/{hash}/response', set_response_data)
+    app.router.add_get('/{hash}/ws', sockets)
     app.router.add_static(
         '/static/', path=str(Path('.') / 'static'), name='static')

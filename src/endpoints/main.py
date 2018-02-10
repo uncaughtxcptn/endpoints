@@ -16,6 +16,7 @@ local_conf = load_config(str(Path('.') / 'config' / 'local.yaml'))
 if local_conf:
     dict_merge(conf, local_conf)
 app['config'] = conf
+app['sockets'] = {}
 aiohttp_jinja2.setup(
     app, loader=jinja2.FileSystemLoader('endpoints/templates/'))
 setup_routes(app=app)
