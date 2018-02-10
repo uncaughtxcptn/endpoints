@@ -26,7 +26,8 @@ async def visit_endpoint(request):
     accesslog_t = AccessLog.__table__
     async with db.acquire() as conn:
         result = await conn.execute(
-            endpoint_t.select().where(endpoint_t.c.hash == hash_value))
+            endpoint_t.select().where(endpoint_t.c.hash == hash_value).where(
+                endpoint_t.c.live == True))
         endpoint = await result.first()
         if endpoint is None:
             raise web.HTTPNotFound()
@@ -120,6 +121,38 @@ async def set_response_data(request):
             'endpoint_id': endpoint.id}
         await conn.execute(response_t.insert().values(response_data))
     return web.json_response(response_data)
+
+
+class EndpointLiveView(web.View):
+
+    async def get_endpoint(self, conn):
+        endpoint_t = Endpoint.__table__
+        hash_value = self.request.match_info['hash']
+        endpoint = await conn.execute(
+            endpoint_t.select().where(endpoint_t.c.hash == hash_value))
+        endpoint = await endpoint.first()
+        if endpoint is None:
+            raise web.HTTPNotFound()
+        return endpoint
+
+    async def get(self):
+        db = self.request.app['db']
+        async with db.acquire() as conn:
+            endpoint = await self.get_endpoint(conn)
+            return web.json_response({'live': endpoint.live})
+
+    async def post(self):
+        db = self.request.app['db']
+        hash_value = self.request.match_info['hash']
+        endpoint_t = Endpoint.__table__
+        async with db.acquire() as conn:
+            post_data = await self.request.post()
+            live = int(post_data.get('live', 1)) == 1
+            values = {'live': live}
+            await conn.execute(
+                endpoint_t.update().where(endpoint_t.c.hash == hash_value).
+                values(values))
+            return web.json_response(values)
 
 
 async def sockets(request):

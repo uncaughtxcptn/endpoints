@@ -6,7 +6,7 @@ import psycopg2
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (
-    Column, Integer, String, DateTime, ForeignKey, Text)
+    Column, Integer, String, DateTime, ForeignKey, Text, Boolean)
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import CreateTable, DropTable
 
@@ -19,7 +19,7 @@ class Endpoint(Base):
     id = Column(Integer, primary_key=True)
     hash = Column(String(256), unique=True)
     when = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
-
+    live = Column(Boolean, default=True)
     access_logs = relationship(
         'AccessLog', back_populates='endpoint', cascade='all, delete')
     responses = relationship(
