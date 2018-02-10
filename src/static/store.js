@@ -62,8 +62,8 @@ export default new Vuex.Store({
 
     actions: {
         async fetchLiveStatus(context) {
-            const statusEndpoint = `/${context.state.hash}/live`;
-            const response = await fetch(statusEndpoint).then(response => response.json());
+            const endpoint = `/${context.state.hash}/live`;
+            const response = await fetch(endpoint).then(response => response.json());
             context.commit('setLiveStatus', response.live);
         },
 
