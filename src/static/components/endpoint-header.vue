@@ -5,8 +5,8 @@
             <button class="copy-btn" @click="copyEndpoint"></button>
         </header>
         <div class="switches">
-            <labelled-switch label="Live" :checked="isLive" @change="onIsLiveChange"></labelled-switch>
-            <labelled-switch label="Auto Response" :checked="autoResponse" @change="onAutoResponseChange"></labelled-switch>
+            <labelled-switch label="Live" :checked="isLive" :disabled="true" @change="onIsLiveChange"></labelled-switch>
+            <labelled-switch label="Auto Response" :checked="autoResponse" :disabled="true" @change="onAutoResponseChange"></labelled-switch>
         </div>
 
         <response-form v-if="autoResponse" @submit="onAutoResponseSubmit"></response-form>
