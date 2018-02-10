@@ -5,7 +5,7 @@
             <button class="copy-btn" @click="copyEndpoint"></button>
         </header>
         <div class="switches">
-            <labelled-switch label="Live" :checked="isLive" :disabled="true" @change="onIsLiveChange"></labelled-switch>
+            <labelled-switch label="Live" :checked="isLive" @change="onIsLiveChange"></labelled-switch>
             <labelled-switch label="Auto Response" :checked="autoResponse" :disabled="true" @change="onAutoResponseChange"></labelled-switch>
         </div>
 
@@ -16,6 +16,7 @@
 <script>
     import { mapState } from 'vuex';
     import { copy } from '../lib/clipboard';
+    import { objectToFormData } from '../lib/utils';
 
     export default {
         data() {
@@ -26,6 +27,12 @@
         },
 
         computed: mapState(['baseUrl', 'hash']),
+
+        watch: {
+            isLive(isLive) {
+                this.$store.dispatch('updateLiveStatus', isLive);
+            }
+        },
 
         methods: {
             onIsLiveChange(isLive) {
@@ -41,20 +48,8 @@
                 const endpoint = `/${this.hash}/response`;
                 const response = await fetch(endpoint, {
                     method: 'POST',
-                    body: this.objectToFormData(data)
+                    body: objectToFormData(data)
                 }).then(response => response.json());
-            },
-
-            objectToFormData(data) {
-                const formData = new FormData();
-                Object.keys(data).forEach(key => {
-                    let value = data[key];
-                    if (typeof value === 'object') {
-                        value = JSON.stringify(value);
-                    }
-                    formData.set(key, value);
-                });
-                return formData;
             },
 
             copyEndpoint() {
