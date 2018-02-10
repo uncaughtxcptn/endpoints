@@ -49,7 +49,10 @@
 
         beforeRouteEnter(to, from, next) {
             store.commit('setHash', to.params.hash);
-            store.dispatch('fetchLiveStatus').then(() => next());
+            Promise.all([
+                store.dispatch('fetchLiveStatus'),
+                store.dispatch('fetchAutoResponse')
+            ]).then(() => next());
         },
 
         beforeRouteLeave(to, from, next) {
