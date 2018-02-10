@@ -1,6 +1,6 @@
 <template>
-    <label class="base-switch">
-        <input type="checkbox" v-model="isChecked">
+    <label class="base-switch" :class="{ disabled }">
+        <input type="checkbox" :disabled="disabled" v-model="isChecked">
         <span class="switch"></span>
     </label>
 </template>
@@ -9,6 +9,10 @@
     export default {
         props: {
             checked: {
+                type: Boolean,
+                default: false
+            },
+            disabled: {
                 type: Boolean,
                 default: false
             }
@@ -37,6 +41,10 @@
         display: inline-block;
         position: relative;
         font-size: 0.9em;
+    }
+
+    .disabled {
+        opacity: 0.5;
     }
 
     input {
