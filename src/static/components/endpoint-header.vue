@@ -11,7 +11,7 @@
 
         <response-form
             v-if="willAutoResponse"
-            @submit="onAutoResponseSubmit"
+            @submit="setAutoResponse"
             :status-code="autoResponse.statusCode"
             :headers="autoResponse.headers"
             :response-body="autoResponse.responseBody">
