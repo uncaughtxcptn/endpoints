@@ -59,7 +59,7 @@
 
         beforeRouteEnter(to, from, next) {
             store.commit('setHash', to.params.hash);
-            next();
+            store.dispatch('fetchLiveStatus').then(() => next());
         },
 
         beforeRouteLeave(to, from, next) {

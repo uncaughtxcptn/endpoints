@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { objectToFormData } from './lib/utils';
 
 Vue.use(Vuex);
 
@@ -7,6 +8,7 @@ export default new Vuex.Store({
     state: {
         baseUrl: process.env.BASE_URL || 'localhost:8080',
         hash: null,
+        isLive: false,
         requestLogs: [],
         bufferedRequestLogs: []
     },
@@ -24,6 +26,10 @@ export default new Vuex.Store({
 
         unsetHash(state) {
             state.hash = null;
+        },
+
+        setLiveStatus(state, isLive) {
+            state.isLive = isLive;
         },
 
         setRequestLogs(state, requestLogs) {
@@ -56,6 +62,21 @@ export default new Vuex.Store({
     },
 
     actions: {
+        async fetchLiveStatus(context) {
+            const endpoint = `/${context.state.hash}/live`;
+            const response = await fetch(endpoint).then(response => response.json());
+            context.commit('setLiveStatus', response.live);
+        },
+
+        async updateLiveStatus(context, isLive) {
+            const endpoint = `/${context.state.hash}/live`;
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: objectToFormData({ live: isLive ? 1 : 0 })
+            });
+            context.commit('setLiveStatus', isLive);
+        },
+
         async fetchRequestLogs(context) {
             const logsEndpoint = `/${context.state.hash}/logs`;
             const requestLogs = await fetch(logsEndpoint).then(response => response.json());
