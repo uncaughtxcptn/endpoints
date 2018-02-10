@@ -13,7 +13,14 @@ export default new Vuex.Store({
         requestLogs: [],
         bufferedRequestLogs: [],
         availableEndpoints: [],
-        isLoadingNavigation: false
+        isLoadingNavigation: false,
+        autoResponse: {
+            statusCode: null,
+            headers: [
+                { name: 'Content-Type', value: '' }
+            ],
+            responseCode: null
+        }
     },
 
     getters: {
