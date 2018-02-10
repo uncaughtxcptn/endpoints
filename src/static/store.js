@@ -110,6 +110,18 @@ export default new Vuex.Store({
             context.commit('setLiveStatus', isLive);
         },
 
+        async fetchAutoResponse(context) {
+            // TODO: Fetch auto-response data from backend
+            const response = {
+                statusCode: 500,
+                headers: [
+                    { name: 'Content-Type', value: 'text/plain' }
+                ],
+                responseBody: 'Something went wrong on our side.'
+            };
+            context.commit('setAutoResponse', response);
+        },
+
         async fetchRequestLogs(context) {
             const logsEndpoint = `/${context.state.hash}/logs`;
             let requestLogs = await fetch(logsEndpoint).then(response => response.json());
