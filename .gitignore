@@ -2,3 +2,4 @@ endpoints_env/*
 node_modules
 build
 *.pyc
+src/config/local.yaml

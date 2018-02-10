@@ -7,11 +7,14 @@ from pathlib import Path
 
 from db import init_pg, close_pg
 from routes import setup_routes
-from utils import load_config
+from utils import load_config, dict_merge
 
 
 app = web.Application()
 conf = load_config(str(Path('.') / 'config' / 'endpoints.yaml'))
+local_conf = load_config(str(Path('.') / 'config' / 'local.yaml'))
+if local_conf:
+    dict_merge(conf, local_conf)
 app['config'] = conf
 aiohttp_jinja2.setup(
     app, loader=jinja2.FileSystemLoader('endpoints/templates/'))
