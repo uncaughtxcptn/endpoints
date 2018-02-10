@@ -13,5 +13,6 @@ def setup_routes(app):
     app.router.add_post('/{hash}/response', set_response_data)
     app.router.add_route('*', '/{hash}/live', EndpointLiveView)
     app.router.add_get('/{hash}/ws', sockets)
-    app.router.add_static(
-        '/static/', path=str(Path('.') / 'static'), name='static')
+    if app['config']['debug']:
+        app.router.add_static(
+            '/static/', path=str(Path('.') / 'static'), name='static')
