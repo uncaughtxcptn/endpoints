@@ -37,6 +37,7 @@
 
     .features {
         display: flex;
+        flex-wrap: wrap;
     }
 
     .feature {
@@ -46,6 +47,7 @@
     }
 
     img {
+        max-width: 100%;
         padding: 3px;
         border: 1px solid var(--gray-1);
         border-radius: 2px;
@@ -66,5 +68,15 @@
     p {
         font-weight: 300;
         color: var(--gray-3);
+    }
+
+    @media (max-width: 600px) {
+        .feature {
+            width: 100%;
+        }
+
+        .feature:not(:last-child) {
+            margin-bottom: 4rem;
+        }
     }
 </style>

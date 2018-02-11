@@ -119,4 +119,10 @@
     .timestamp {
         margin-left: auto;
     }
+
+    @media (max-width: 550px) {
+        .timestamp {
+            display: none;
+        }
+    }
 </style>

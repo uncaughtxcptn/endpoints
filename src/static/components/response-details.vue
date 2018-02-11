@@ -22,5 +22,6 @@
 <style scoped>
     .response-details {
         padding: 0.4rem 0.8rem;
+        overflow: auto;
     }
 </style>

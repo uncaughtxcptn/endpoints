@@ -46,6 +46,7 @@ button {
 /** Utility classes **/
 
 .wrapper {
-    width: 80rem;
+    width: 90vw;
+    max-width: 80rem;
     margin: 0 auto;
 }
