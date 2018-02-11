@@ -20,8 +20,9 @@ module.exports = {
             use: ['style-loader', 'css-loader']
         }, {
             test: /\.png$/,
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
+                limit: 1024 * 10,
                 name: '[name].[ext]'
             }
         } ]
