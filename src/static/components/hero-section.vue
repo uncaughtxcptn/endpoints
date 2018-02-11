@@ -24,4 +24,16 @@
     span {
         color: var(--primary-color);
     }
+
+    @media (max-width: 600px) {
+        .wrapper {
+            padding: 8rem 6rem;
+        }
+    }
+
+    @media (max-width: 450px) {
+        .wrapper {
+            padding: 6rem 3rem;
+        }
+    }
 </style>
