@@ -76,6 +76,7 @@
     }
 
     .copy-btn {
+        flex-shrink: 0;
         width: 2.4rem;
         height: 2.4rem;
         border: none;
@@ -109,5 +110,25 @@
         border-radius: 2px;
         margin-top: 0.8rem;
         font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+        header {
+            align-items: flex-end;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+        }
+
+        span {
+            display: block;
+        }
+    }
+
+    @media (max-width: 500px) {
+        h2 {
+            font-size: 1.4rem;
+        }
     }
 </style>

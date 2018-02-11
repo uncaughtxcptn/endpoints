@@ -41,14 +41,12 @@
                     <textarea v-model="form.responseBody"></textarea>
                 </td>
             </tr>
-
-            <tr>
-                <td colspan="3" class="form-actions">
-                    <button class="send-btn">Set Response</button>
-                    <button type="button" @click="addHeader">Add Header</button>
-                </td>
-            </tr>
         </table>
+
+        <div class="form-actions">
+            <button class="send-btn">Set Response</button>
+            <button type="button" @click="addHeader">Add Header</button>
+        </div>
     </form>
 </template>
 
@@ -128,7 +126,7 @@
         width: 2.2rem;
     }
 
-    td.form-actions {
+    .form-actions {
         display: flex;
         padding-top: 0.4rem;
     }
