@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src/static/index.js'),
@@ -9,6 +10,7 @@ module.exports = {
         chunkFilename: '[name].js',
         publicPath: '/static/build/'
     },
+    devtool: 'source-map',
     module: {
         rules: [ {
             test: /\.vue$/,
@@ -30,6 +32,9 @@ module.exports = {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
                 BASE_URL: JSON.stringify(process.env.BASE_URL || 'localhost:8080')
             }
+        }),
+        new UglifyJSPlugin({
+            sourceMap: true
         })
     ],
     resolve: {
