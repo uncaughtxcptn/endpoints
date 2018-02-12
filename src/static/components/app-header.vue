@@ -3,7 +3,7 @@
         <div class="wrapper">
             <router-link :to="{ name: 'landing-page' }" class="logo">Endpoints</router-link>
             <button class="button create-btn" @click="onClick">Create Endpoint</button>
-            <router-link class="button list-btn" :to="{ name: 'landing-page' }" v-if="hasAvailableEndpoints"></router-link>
+            <router-link class="button list-btn" :to="{ name: 'endpoints-page' }" v-if="hasAvailableEndpoints"></router-link>
         </div>
     </header>
 </template>
