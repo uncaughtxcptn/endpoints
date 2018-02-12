@@ -99,11 +99,8 @@ export default new Vuex.Store({
         },
 
         async fetchAvailableEndpoints(context) {
-            context.commit('setAvailableEndpoints', [
-                { hash: '34eaa84b-c1c3-49c1-ad4c-6f12e5412f24', timestamp: Date.now() },
-                { hash: '34eaa84b-c1c3-49c1-ad4c-6f12e5412f24', timestamp: Date.now() },
-                { hash: '34eaa84b-c1c3-49c1-ad4c-6f12e5412f24', timestamp: Date.now() }
-            ]);
+            const endpoints = await endpointsDB.getAll();
+            context.commit('setAvailableEndpoints', endpoints);
         },
 
         async createEndpoint(context) {
