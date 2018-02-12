@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { objectToFormData } from './lib/utils';
-import * as endpointsDB from './lib/endpoints-db';
+import * as endpointsDb from './lib/endpoints-db';
 
 Vue.use(Vuex);
 
@@ -99,13 +99,13 @@ export default new Vuex.Store({
         },
 
         async fetchAvailableEndpoints(context) {
-            const endpoints = await endpointsDB.getAll();
+            const endpoints = await endpointsDb.getAll();
             context.commit('setAvailableEndpoints', endpoints);
         },
 
         async createEndpoint(context) {
             const response = await fetch('/endpoints').then(response => response.json());
-            await endpointsDB.put(response);
+            await endpointsDb.put(response);
             return response;
         },
 

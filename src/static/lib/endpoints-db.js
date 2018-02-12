@@ -10,8 +10,9 @@ const db = idb.open('endpoints', 1, upgradeDb => {
 export function put(data) {
     data = Object.assign({}, data, { timestamp: Date.now() });
     return db.then(db => {
-        const transaction = db.transaction('endpoints', 'readwrite');
-        transaction.objectStore('endpoints').put(data)
+        const transaction = db.transaction('endpoints', 'readwrite')
+            .objectStore('endpoints')
+            .put(data)
         return transaction.complete;
     });
 }
