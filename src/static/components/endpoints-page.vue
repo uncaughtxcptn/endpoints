@@ -4,17 +4,21 @@
 
         <div class="wrapper">
             <h2>Your Endpoints</h2>
-            <p class="subtitle">* These endpoints are only stored in this browser.</p>
+            <p class="subtitle">* This list is stored only in this browser.</p>
 
-            <router-link
-                class="endpoint-link"
-                v-for="endpoint in availableEndpoints"
-                :key="endpoint.hash"
-                :to="{ name: 'endpoint-page', params: { hash: endpoint.hash } }"
-            >
-                <p>{{ baseUrl }}/<span>{{ endpoint.hash }}</span></p>
-                <time>{{ formatDate(endpoint.timestamp) }}</time>
-            </router-link>
+            <template v-if="hasAvailableEndpoints">
+                <router-link
+                    class="endpoint-link"
+                    v-for="endpoint in availableEndpoints"
+                    :key="endpoint.hash"
+                    :to="{ name: 'endpoint-page', params: { hash: endpoint.hash } }"
+                >
+                    <p>{{ baseUrl }}/<span>{{ endpoint.hash }}</span></p>
+                    <time>{{ formatDate(endpoint.timestamp) }}</time>
+                </router-link>
+            </template>
+
+            <p v-else class="empty">You currently don't have any endpoints.</p>
         </div>
 
         <app-footer></app-footer>
@@ -22,11 +26,14 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapState, mapGetters } from 'vuex';
     import { format } from 'date-fns';
 
     export default {
-        computed: mapState(['baseUrl', 'availableEndpoints']),
+        computed: Object.assign({},
+            mapState(['baseUrl', 'availableEndpoints']),
+            mapGetters(['hasAvailableEndpoints'])
+        ),
 
         methods: {
             formatDate(timestamp) {
@@ -79,5 +86,11 @@
         margin: 0.8rem 0;
         font-size: 1.2rem;
         text-decoration: none;
+    }
+
+    .empty {
+        padding: 0.4rem 0;
+        font-size: 1.3rem;
+        color: var(--warning-color);
     }
 </style>
