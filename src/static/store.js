@@ -17,6 +17,10 @@ export default new Vuex.Store({
     getters: {
         bufferedRequestLogsCount(state) {
             return state.bufferedRequestLogs.length;
+        },
+
+        hasAvailableEndpoints(state) {
+            return state.availableEndpoints.length > 0;
         }
     },
 
