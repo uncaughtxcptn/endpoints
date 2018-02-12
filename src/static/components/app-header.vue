@@ -2,7 +2,8 @@
     <header class="app-header">
         <div class="wrapper">
             <router-link :to="{ name: 'landing-page' }" class="logo">Endpoints</router-link>
-            <button @click="onClick">Create Endpoint</button>
+            <button class="button create-btn" @click="onClick">Create Endpoint</button>
+            <router-link class="button list-btn" :to="{ name: 'landing-page' }"></router-link>
         </div>
     </header>
 </template>
@@ -43,24 +44,36 @@
 
     .wrapper {
         display: flex;
-        justify-content: space-between;
         align-items: center;
     }
 
     .logo {
+        margin-right: auto;
         font-size: 1.8rem;
         font-weight: 300;
         text-decoration: none;
     }
 
-    button {
+    .button {
         padding: 0.5em 1em;
-        border: 1px solid var(--primary-color-dark-1);
         border-radius: 2px;
         font-size: 1.3rem;
         text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .create-btn {
+        border: 1px solid var(--primary-color-dark-1);
         color: #fff;
         background-color: var(--primary-color);
-        cursor: pointer;
+    }
+
+    .list-btn {
+        width: 3.3rem;
+        height: 3.3rem;
+        border: 1px solid var(--gray-1);
+        margin-left: 0.4rem;
+        background: url("~images/list.png") center center no-repeat;
+        background-size: 50%;
     }
 </style>
