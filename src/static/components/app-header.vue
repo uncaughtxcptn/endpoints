@@ -19,7 +19,7 @@
 
         methods: {
             async onClick(e) {
-                const response = await fetch('/endpoints').then(response => response.json());
+                const response = await this.$store.dispatch('createEndpoint');
                 const routeData = {
                     name: 'endpoint-page',
                     params: {

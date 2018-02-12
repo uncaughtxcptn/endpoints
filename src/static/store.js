@@ -105,6 +105,11 @@ export default new Vuex.Store({
             ]);
         },
 
+        async createEndpoint(context) {
+            const response = await fetch('/endpoints').then(response => response.json());
+            return response;
+        },
+
         setResponse(context, { id, response }) {
             // TODO: Response should be sent to the backend.
             let responseString = `
