@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { objectToFormData } from './lib/utils';
+import * as endpointsDb from './lib/endpoints-db';
 
 Vue.use(Vuex);
 
@@ -10,12 +11,17 @@ export default new Vuex.Store({
         hash: null,
         isLive: false,
         requestLogs: [],
-        bufferedRequestLogs: []
+        bufferedRequestLogs: [],
+        availableEndpoints: []
     },
 
     getters: {
         bufferedRequestLogsCount(state) {
             return state.bufferedRequestLogs.length;
+        },
+
+        hasAvailableEndpoints(state) {
+            return state.availableEndpoints.length > 0;
         }
     },
 
@@ -61,6 +67,10 @@ export default new Vuex.Store({
 
         unsetRequestLogs(state) {
             state.requestLogs = [];
+        },
+
+        setAvailableEndpoints(state, availableEndpoints) {
+            state.availableEndpoints = availableEndpoints;
         }
     },
 
@@ -86,6 +96,17 @@ export default new Vuex.Store({
             requestLogs = requestLogs.map(requestLog =>
                 Object.assign({}, requestLog, { isExpanded: false }));
             context.commit('setRequestLogs', requestLogs);
+        },
+
+        async fetchAvailableEndpoints(context) {
+            const endpoints = await endpointsDb.getAll();
+            context.commit('setAvailableEndpoints', endpoints);
+        },
+
+        async createEndpoint(context) {
+            const response = await fetch('/endpoints').then(response => response.json());
+            await endpointsDb.put(response);
+            return response;
         },
 
         setResponse(context, { id, response }) {
