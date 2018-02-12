@@ -10,7 +10,8 @@ export default new Vuex.Store({
         hash: null,
         isLive: false,
         requestLogs: [],
-        bufferedRequestLogs: []
+        bufferedRequestLogs: [],
+        availableEndpoints: []
     },
 
     getters: {
@@ -61,6 +62,10 @@ export default new Vuex.Store({
 
         unsetRequestLogs(state) {
             state.requestLogs = [];
+        },
+
+        setAvailableEndpoints(state, availableEndpoints) {
+            state.availableEndpoints = availableEndpoints;
         }
     },
 
@@ -86,6 +91,10 @@ export default new Vuex.Store({
             requestLogs = requestLogs.map(requestLog =>
                 Object.assign({}, requestLog, { isExpanded: false }));
             context.commit('setRequestLogs', requestLogs);
+        },
+
+        async fetchAvailableEndpoints(context) {
+            context.commit('setAvailableEndpoints', []);
         },
 
         setResponse(context, { id, response }) {
