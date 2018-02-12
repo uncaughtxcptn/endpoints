@@ -15,3 +15,11 @@ export function put(data) {
         return transaction.complete;
     });
 }
+
+export function getAll() {
+    return db.then(db =>
+        db.transaction('endpoints')
+            .objectStore('endpoints')
+            .getAll()
+    );
+}
