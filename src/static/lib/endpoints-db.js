@@ -18,9 +18,16 @@ export function put(data) {
 }
 
 export function getAll() {
-    return db.then(db =>
-        db.transaction('endpoints')
-            .objectStore('endpoints')
-            .getAll()
-    );
+    return db.then(db => {
+        const endpoints = [];
+        const transaction = db.transaction('endpoints');
+        transaction.objectStore('endpoints')
+            .openCursor(null, 'prev')
+            .then(function iterate(cursor) {
+                if (!cursor) return;
+                endpoints.push(cursor.value);
+                cursor.continue().then(iterate);
+            });
+        return transaction.complete.then(() => endpoints);
+    });
 }
