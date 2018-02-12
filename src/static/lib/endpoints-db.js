@@ -7,4 +7,11 @@ const db = idb.open('endpoints', 1, upgradeDb => {
     }
 });
 
-export default db;
+export function put(data) {
+    data = Object.assign({}, data, { timestamp: Date.now() });
+    return db.then(db => {
+        const transaction = db.transaction('endpoints', 'readwrite');
+        transaction.objectStore('endpoints').put(data)
+        return transaction.complete;
+    });
+}
