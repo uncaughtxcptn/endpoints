@@ -3,16 +3,19 @@
         <div class="wrapper">
             <router-link :to="{ name: 'landing-page' }" class="logo">Endpoints</router-link>
             <button class="button create-btn" @click="onClick">Create Endpoint</button>
-            <router-link class="button list-btn" :to="{ name: 'landing-page' }"></router-link>
+            <router-link class="button list-btn" :to="{ name: 'landing-page' }" v-if="hasAvailableEndpoints"></router-link>
         </div>
     </header>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapState, mapGetters } from 'vuex';
 
     export default {
-        computed: mapState(['hash']),
+        computed: Object.assign({},
+            mapState(['hash']),
+            mapGetters(['hasAvailableEndpoints'])
+        ),
 
         methods: {
             async onClick(e) {
