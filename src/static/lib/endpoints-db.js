@@ -1,33 +1,57 @@
-import idb from 'idb';
+let idb;
 
-const db = idb.open('endpoints', 1, upgradeDb => {
-    switch (upgradeDb.oldVersion) {
-        case 0:
-            upgradeDb.createObjectStore('endpoints', { keyPath: 'id' });
+function database() {
+    if (idb) {
+        return Promise.resolve(idb);
     }
-});
 
-export function put(data) {
-    data = Object.assign({}, data, { timestamp: Date.now() });
-    return db.then(db => {
-        const transaction = db.transaction('endpoints', 'readwrite')
-            .objectStore('endpoints')
-            .put(data)
-        return transaction.complete;
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open('endpoints', 1);
+        request.onupgradeneeded = (e) => {
+            const upgradeDb = e.target.result;
+
+            switch (e.oldVersion) {
+                case 0:
+                    upgradeDb.createObjectStore('endpoints', { keyPath: 'id' });
+            }
+        };
+        request.onsuccess = (e) => {
+            idb = e.target.result;
+            resolve(idb);
+        };
+        request.onerror = reject;
     });
 }
 
+export function put(data) {
+    data = Object.assign({}, data, { timestamp: Date.now() });
+
+    return database().then(db => new Promise((resolve, reject) => {
+        const transaction = db.transaction('endpoints', 'readwrite');
+        const store = transaction.objectStore('endpoints');
+        const request = store.put(data);
+
+        request.onsuccess = resolve;
+        request.onerror = reject;
+    }));
+}
+
 export function getAll() {
-    return db.then(db => {
-        const endpoints = [];
+    return database().then(db => new Promise((resolve, reject) => {
         const transaction = db.transaction('endpoints');
-        transaction.objectStore('endpoints')
-            .openCursor(null, 'prev')
-            .then(function iterate(cursor) {
-                if (!cursor) return;
+        const store = transaction.objectStore('endpoints');
+        const request = store.openCursor(null, 'prev');
+        const endpoints = [];
+
+        request.onsuccess = (e) => {
+            const cursor = e.target.result;
+            if (cursor) {
                 endpoints.push(cursor.value);
-                cursor.continue().then(iterate);
-            });
-        return transaction.complete.then(() => endpoints);
-    });
+                cursor.continue();
+            } else {
+                resolve(endpoints);
+            }
+        };
+        request.onerror = reject;
+    }));
 }
