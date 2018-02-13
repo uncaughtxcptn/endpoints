@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "date-fns": "1.29.0",
-    "idb": "2.0.4",
     "vue": "2.5.13",
     "vue-router": "3.0.1",
     "vuex": "3.0.1"
