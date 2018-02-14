@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "rm -rf src/static/build",
-    "build": "./node_modules/.bin/webpack",
-    "build:watch": "./node_modules/.bin/webpack --watch",
+    "build": "./node_modules/.bin/webpack --progress",
+    "build:watch": "npm run build -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
