@@ -1,7 +1,5 @@
 <template>
     <div class="endpoints-page">
-        <app-header></app-header>
-
         <div class="wrapper">
             <h2>Your Endpoints</h2>
             <p class="subtitle">* This list is stored only in this browser.</p>
@@ -20,8 +18,6 @@
 
             <p v-else class="empty">You currently don't have any endpoints.</p>
         </div>
-
-        <app-footer></app-footer>
     </div>
 </template>
 
@@ -40,26 +36,11 @@
                 const date = new Date(timestamp);
                 return format(date, 'MMM D, YYYY hh:mm:ss A');
             }
-        },
-
-        components: {
-            'app-header': require('./app-header.vue').default,
-            'app-footer': require('./app-footer.vue').default
         }
     };
 </script>
 
 <style scoped>
-    .endpoints-page {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .app-footer {
-        margin-top: auto;
-    }
-
     .wrapper {
         padding: 5rem 0;
     }
