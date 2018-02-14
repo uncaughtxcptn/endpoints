@@ -59,7 +59,7 @@ async def create_endpoint(request):
     db = request.app['db']
     async with db.acquire() as conn:
         async with conn.begin():
-            hash_value = str(uuid.uuid4().hex)
+            hash_value = uuid.uuid4().hex
             data = await conn.execute(
                 Endpoint.__table__.insert().values({'hash': hash_value}))
             data = await data.fetchone()
