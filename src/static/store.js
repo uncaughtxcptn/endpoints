@@ -71,6 +71,10 @@ export default new Vuex.Store({
 
         setAvailableEndpoints(state, availableEndpoints) {
             state.availableEndpoints = availableEndpoints;
+        },
+
+        insertAvailableEndpoint(state, endpoint) {
+            state.availableEndpoints = [endpoint, ...state.availableEndpoints];
         }
     },
 
