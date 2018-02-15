@@ -6,11 +6,10 @@ import './stylesheets/index.css';
 
 // Fetch states that are required for every route. Each route could still
 // define their own specific navigation guards.
-router.beforeEach(async (to, from, next) => {
+router.afterEach((to, from) => {
     if (!store.getters.hasAvailableEndpoints) {
-        await store.dispatch('fetchAvailableEndpoints');
+        store.dispatch('fetchAvailableEndpoints');
     }
-    next();
 });
 
 new Vue({
