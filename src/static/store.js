@@ -71,6 +71,10 @@ export default new Vuex.Store({
 
         setAvailableEndpoints(state, availableEndpoints) {
             state.availableEndpoints = availableEndpoints;
+        },
+
+        insertAvailableEndpoint(state, endpoint) {
+            state.availableEndpoints = [endpoint, ...state.availableEndpoints];
         }
     },
 
@@ -105,7 +109,8 @@ export default new Vuex.Store({
 
         async createEndpoint(context) {
             const response = await fetch('/endpoints').then(response => response.json());
-            await endpointsDb.put(response);
+            const endpoint = await endpointsDb.put(response);
+            context.commit('insertAvailableEndpoint', endpoint);
             return response;
         },
 

@@ -31,7 +31,7 @@ export function put(data) {
         const store = transaction.objectStore('endpoints');
         const request = store.put(data);
 
-        request.onsuccess = resolve;
+        request.onsuccess = () => resolve(data);
         request.onerror = reject;
     }));
 }
