@@ -14,4 +14,4 @@ async def get_sub_channel(app, channel_name, redis=None):
     if not redis:
         redis = await get_redis(app)
     channel = await redis.subscribe(channel_name)
-    return channel[0]
+    return channel[0], redis

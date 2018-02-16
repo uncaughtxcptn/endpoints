@@ -7,7 +7,7 @@ from datetime import datetime
 
 import json
 
-from redis_channel import get_redis, get_sub_channel
+from redis_channel import get_sub_channel
 
 from sqlalchemy import desc
 
@@ -67,10 +67,14 @@ async def sockets(request):
     ws = web.WebSocketResponse()
     await ws.prepare(request)
     hash_value = request.match_info['hash']
-    channel = await get_sub_channel(request.app, hash_value)
-    while await channel.wait_message():
-        data = await channel.get(encoding='utf-8')
-        ws.send_str(data)
+    channel, redis = await get_sub_channel(request.app, hash_value)
+    try:
+        while await channel.wait_message():
+            data = await channel.get(encoding='utf-8')
+            ws.send_str(data)
+    except Exception:
+        pass
+    redis.close()
     return ws
 
 
