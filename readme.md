@@ -27,8 +27,22 @@ $ npm run build:watch  # You can also auto-compile assets as they change
 # For production build of assets, NODE_ENV needs to be specified
 $ NODE_ENV=production npm run build
 
-# TODO: Add how to run the Python project
-```
+# Install redis
+Installation guide can be found [here](https://redis.io/topics/quickstart)
+
+# Install postgresql
+Installation guide can be found [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
+
+
+# Add how to run the Python project
+Make sure to create a postgres database
+$ createdb endpoints
+Make sure that redis is running (you need a separate terminal for this)
+$ redis-server
+Run the Web server
+$ cd endpoints/src
+$ python main.py
+
 
 
 ## License
