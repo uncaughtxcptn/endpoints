@@ -22,8 +22,6 @@ router.afterEach((to, from) => {
     store.commit('setIsLoadingNavigation', false);
 });
 
-// fixup
-
 new Vue({
     el: '#app',
     router,
