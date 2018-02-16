@@ -5,3 +5,4 @@ database:
   host: localhost
   port: ''
 debug: true
+redis_url: redis://localhost
