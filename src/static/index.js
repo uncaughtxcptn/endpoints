@@ -12,6 +12,16 @@ router.afterEach((to, from) => {
     }
 });
 
+// Show loading animation between navigations.
+router.beforeEach((to, from, next) => {
+    store.commit('setIsLoadingNavigation', true);
+    next();
+});
+
+router.afterEach((to, from) => {
+    store.commit('setIsLoadingNavigation', false);
+});
+
 new Vue({
     el: '#app',
     router,

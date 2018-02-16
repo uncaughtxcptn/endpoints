@@ -1,5 +1,7 @@
 <template>
     <header class="app-header">
+        <navigation-loader></navigation-loader>
+
         <div class="wrapper">
             <router-link :to="{ name: 'landing-page' }" class="logo">Endpoints</router-link>
             <button class="button create-btn" @click="onClick">Create Endpoint</button>
@@ -34,6 +36,10 @@
                     this.$router.push(routeData);
                 }
             }
+        },
+
+        components: {
+            'navigation-loader': require('./navigation-loader.vue').default
         }
     };
 </script>
@@ -43,6 +49,12 @@
         padding: 1.6rem 0;
         border-bottom: 1px solid var(--gray-1);
         background-color: #fff;
+    }
+
+    .navigation-loader {
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     .wrapper {

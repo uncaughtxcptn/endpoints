@@ -12,7 +12,8 @@ export default new Vuex.Store({
         isLive: false,
         requestLogs: [],
         bufferedRequestLogs: [],
-        availableEndpoints: []
+        availableEndpoints: [],
+        isLoadingNavigation: false
     },
 
     getters: {
@@ -75,6 +76,10 @@ export default new Vuex.Store({
 
         insertAvailableEndpoint(state, endpoint) {
             state.availableEndpoints = [endpoint, ...state.availableEndpoints];
+        },
+
+        setIsLoadingNavigation(state, isLoadingNavigation) {
+            state.isLoadingNavigation = isLoadingNavigation;
         }
     },
 
