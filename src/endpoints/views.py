@@ -1,11 +1,13 @@
 from aiohttp_jinja2 import template
-from aiohttp import web, WSMsgType
+from aiohttp import web
 
 from db import Endpoint, AccessLog, Response
 
 from datetime import datetime
 
 import json
+
+from redis_channel import get_redis, get_sub_channel
 
 from sqlalchemy import desc
 
@@ -22,6 +24,7 @@ async def index(request):
 async def visit_endpoint(request):
     hash_value = request.match_info['hash']
     db = request.app['db']
+    redis = request.app['pub_channel']
     endpoint_t = Endpoint.__table__
     accesslog_t = AccessLog.__table__
     async with db.acquire() as conn:
@@ -41,18 +44,34 @@ async def visit_endpoint(request):
         access_log = await conn.execute(
             accesslog_t.insert().values(access_data))
         access_log = await access_log.fetchone()
-        ws = request.app['sockets'].get(hash_value)
-        if ws:
-            ws.send_str(json.dumps(
-                {'type': 'access-log',
-                 'data': {
-                        'id': access_log.id,
-                        'request': access_data['request'],
-                        'response': access_data['response'],
-                        'when': datetime.utcnow().isoformat()
-                        }
-                 }))
+        channel = await redis.pubsub_channels(hash_value)
+        try:
+            channel = channel[0]
+        except IndexError:
+            pass
+        else:
+            channel_msg = {
+                'type': 'access-log',
+                'data': {
+                    'id': access_log.id,
+                    'request': access_data['request'],
+                    'response': access_data['response'],
+                    'when': datetime.utcnow().isoformat()
+                }
+            }
+            redis.publish(channel, json.dumps(channel_msg))
         return response_obj
+
+
+async def sockets(request):
+    ws = web.WebSocketResponse()
+    await ws.prepare(request)
+    hash_value = request.match_info['hash']
+    channel = await get_sub_channel(request.app, hash_value)
+    while await channel.wait_message():
+        data = await channel.get(encoding='utf-8')
+        ws.send_str(data)
+    return ws
 
 
 async def create_endpoint(request):
@@ -153,17 +172,3 @@ class EndpointLiveView(web.View):
                 endpoint_t.update().where(endpoint_t.c.hash == hash_value).
                 values(values))
             return web.json_response(values)
-
-
-async def sockets(request):
-    ws = web.WebSocketResponse()
-    await ws.prepare(request)
-    hash_value = request.match_info['hash']
-    request.app['sockets'][hash_value] = ws
-    async for msg in ws:
-        if msg.type == WSMsgType.TEXT:
-            if msg.data == 'close':
-                await ws.close()
-    del request.app['sockets'][hash_value]
-    print('closing ws connection')
-    return ws
