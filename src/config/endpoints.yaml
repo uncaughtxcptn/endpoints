@@ -1,8 +1,8 @@
 database:
   name: endpoint
-  user: eman
-  password: ''
-  host: localhost
+  user: endpoint_user
+  password: ue
+  host: postgres
   port: ''
 debug: true
-redis_url: redis://localhost
+redis_url: redis://redis

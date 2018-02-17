@@ -37,4 +37,4 @@ if __name__ == '__main__':
     port = parser.parse_args().port
     if port is None:
         port = '8080'
-    web.run_app(app, host='127.0.0.1', port=int(port))
+    web.run_app(app, host='0.0.0.0', port=int(port))

@@ -5,3 +5,4 @@ build
 src/config/local.yaml
 .DS_Store
 endpoints.pem
+dump.rdb

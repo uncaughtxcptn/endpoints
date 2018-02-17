@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  postgres:
+    image: "postgres:10.2-alpine"
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: endpoint
+      POSTGRES_USER: endpoint_user
+      POSTGRES_PASSWORD: ue
+  redis:
+    image: "redis:alpine"
+
+  endpoint-service:
+    build: .
+    volumes:
+      - .:/code
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+
