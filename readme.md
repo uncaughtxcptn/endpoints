@@ -32,7 +32,7 @@ $ createdb endpoints
 # Make sure that redis is running (you need a separate terminal for this)
 $ redis-server
 # Run the Web server
-$ cd endpoints/src
+$ cd src/endpoints
 $ python main.py
 ```
 
