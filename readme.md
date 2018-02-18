@@ -36,6 +36,12 @@ $ cd src/endpoints
 $ python main.py
 ```
 
+You can also run the application using docker. Make sure docker and docker-compose is installed in your system
+```
+$ docker-compose up
+# the app will be running at localhost:8080
+```
+
 
 ## License
 
