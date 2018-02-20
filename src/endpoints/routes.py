@@ -1,4 +1,4 @@
-from views import (index, create_endpoint, VisitEndpointView, view_access_logs,
+from views import (index, create_endpoint, visit_endpoint, view_access_logs,
                    set_response_data, sockets, EndpointLiveView)
 
 from pathlib import Path
@@ -8,7 +8,7 @@ def setup_routes(app):
     app.router.add_route('GET', '/', index, name='home')
     app.router.add_get('/endpoints', create_endpoint)
     app.router.add_get('/endpoints/list', index)
-    app.router.add_route('*', '/{hash}', VisitEndpointView)
+    app.router.add_route('*', '/{hash}', visit_endpoint)
     app.router.add_get('/{hash}/view', index)
     app.router.add_get('/{hash}/logs', view_access_logs)
     app.router.add_post('/{hash}/response', set_response_data)
