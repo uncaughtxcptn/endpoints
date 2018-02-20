@@ -63,6 +63,37 @@ async def visit_endpoint(request):
         return response_obj
 
 
+class VisitEndpointView(web.View):
+
+    async def get(self, allow_head=True):
+        resp = await visit_endpoint(self.request)
+        return resp
+
+    async def post(self):
+        resp = await visit_endpoint(self.request)
+        return resp
+
+    async def options(self):
+        resp = await visit_endpoint(self.request)
+        return resp
+
+    async def patch(self):
+        resp = await visit_endpoint(self.request)
+        return resp
+
+    async def put(self):
+        resp = await visit_endpoint(self.request)
+        return resp
+
+    async def trace(self):
+        resp = await visit_endpoint(self.request)
+        return resp
+
+    async def delete(self):
+        resp = await visit_endpoint(self.request)
+        return resp
+
+
 async def sockets(request):
     ws = web.WebSocketResponse()
     await ws.prepare(request)
