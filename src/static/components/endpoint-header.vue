@@ -46,7 +46,7 @@
             },
 
             copyEndpoint() {
-                const endpoint = this.baseUrl + '/' + this.hash;
+                const endpoint = window.location.protocol + '//' + this.baseUrl + '/' + this.hash;
                 copy(endpoint);
             }
         },
