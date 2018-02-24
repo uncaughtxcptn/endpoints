@@ -170,7 +170,7 @@ async def get_auto_response(request):
         response_data = {
             'headers': headers,
             'responseBody': response.body,
-            'status_code': response.status_code}
+            'statusCode': response.status_code}
     return web.json_response(response_data)
 
 
