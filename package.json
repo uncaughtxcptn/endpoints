@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/uncaughtxcptn/endpoints#readme",
   "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.2",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
     "css-loader": "0.28.9",
     "file-loader": "1.1.6",
     "style-loader": "0.20.1",
@@ -35,5 +38,10 @@
     "vue-analytics": "5.9.0",
     "vue-router": "3.0.1",
     "vuex": "3.0.1"
+  },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
   }
 }

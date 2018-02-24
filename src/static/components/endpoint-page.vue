@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import { mapState, mapGetters } from 'vuex';
+    import { mapState, mapGetters, mapMutations } from 'vuex';
     import store from '../store';
 
     export default {
@@ -25,11 +25,7 @@
             mapGetters(['bufferedRequestLogsCount'])
         ),
 
-        methods: {
-            flushRequestLogs() {
-                this.$store.commit('flushRequestLogs');
-            }
-        },
+        methods: mapMutations(['flushRequestLogs']),
 
         components: {
             'endpoint-header': require('./endpoint-header.vue').default,

@@ -5,18 +5,17 @@
             <button class="copy-btn" @click="copyEndpoint"></button>
         </header>
         <div class="switches">
-            <labelled-switch label="Live" :checked="isLive" @change="onIsLiveChange"></labelled-switch>
+            <labelled-switch label="Live" :checked="isLive" @change="updateLiveStatus"></labelled-switch>
             <labelled-switch label="Auto Response" :checked="autoResponse" :disabled="true" @change="onAutoResponseChange"></labelled-switch>
         </div>
 
-        <response-form v-if="autoResponse" @submit="onAutoResponseSubmit"></response-form>
+        <response-form v-if="autoResponse" @submit="setAutoResponse"></response-form>
     </section>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapState, mapActions } from 'vuex';
     import { copy } from '../lib/clipboard';
-    import { objectToFormData } from '../lib/utils';
 
     export default {
         data() {
@@ -28,16 +27,10 @@
         computed: mapState(['baseUrl', 'hash', 'isLive']),
 
         methods: {
-            onIsLiveChange(isLive) {
-                this.$store.dispatch('updateLiveStatus', isLive);
-            },
+            ...mapActions(['updateLiveStatus', 'setAutoResponse']),
 
             onAutoResponseChange(autoResponse) {
                 this.autoResponse = autoResponse;
-            },
-
-            async onAutoResponseSubmit(data) {
-                this.$store.dispatch('setAutoResponse', data);
             },
 
             copyEndpoint() {
