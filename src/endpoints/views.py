@@ -162,15 +162,19 @@ async def get_auto_response(request):
             .order_by(desc(response_t.c.id)))
         response = await result.first()
         if response is None:
-            raise web.HTTPNotFound()
-        _headers = json.loads(response.headers)
-        headers = []
-        for k, v in _headers.items():
-            headers.append({'name': k, 'value': v})
-        response_data = {
-            'headers': headers,
-            'responseBody': response.body,
-            'statusCode': response.status_code}
+            response_data = {
+                'headers': [{'name': '', 'value': ''}],
+                'responseBody': '',
+                'statusCode': 200}
+        else:
+            _headers = json.loads(response.headers)
+            headers = []
+            for k, v in _headers.items():
+                headers.append({'name': k, 'value': v})
+            response_data = {
+                'headers': headers,
+                'responseBody': response.body,
+                'statusCode': response.status_code}
     return web.json_response(response_data)
 
 
