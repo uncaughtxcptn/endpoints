@@ -1,5 +1,5 @@
 <template>
-    <button class="base-button" @click="onClick">
+    <button class="base-button" :type="type" @click="onClick">
         <slot></slot>
     </button>
 </template>
@@ -7,6 +7,13 @@
 <script>
     export default {
         props: ['loading'],
+        props: {
+            loading: Boolean,
+            type: {
+                type: String,
+                default: 'button'
+            }
+        },
 
         methods: {
             onClick(e) {
@@ -32,5 +39,9 @@
         border: 1px solid var(--primary-color-dark-1);
         color: #fff;
         background-color: var(--primary-color);
+    }
+
+    .mini {
+        padding: 0.167em 0.33em;
     }
 </style>
