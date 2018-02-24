@@ -9,7 +9,7 @@
             <labelled-switch label="Auto Response" :checked="autoResponse" :disabled="true" @change="onAutoResponseChange"></labelled-switch>
         </div>
 
-        <response-form v-if="autoResponse" @submit="setAutoResponse"></response-form>
+        <response-form v-if="autoResponse" @submit="onAutoResponseSubmit"></response-form>
     </section>
 </template>
 
@@ -27,10 +27,15 @@
         computed: mapState(['baseUrl', 'hash', 'isLive']),
 
         methods: {
-            ...mapActions(['updateLiveStatus', 'setAutoResponse']),
+            ...mapActions(['updateLiveStatus']),
 
             onAutoResponseChange(autoResponse) {
                 this.autoResponse = autoResponse;
+            },
+
+            onAutoResponseSubmit(data) {
+                this.$store.dispatch('setAutoResponse', data);
+                this.$ga.event('endpoints', 'set-auto-response');
             },
 
             copyEndpoint() {
