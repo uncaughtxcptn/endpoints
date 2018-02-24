@@ -146,6 +146,34 @@ async def set_response_data(request):
     return web.json_response(response_data)
 
 
+async def get_auto_response(request):
+    hash_value = request.match_info['hash']
+    db = request.app['db']
+    endpoint_t = Endpoint.__table__
+    response_t = Response.__table__
+    async with db.acquire() as conn:
+        result = await conn.execute(
+            endpoint_t.select().where(endpoint_t.c.hash == hash_value))
+        endpoint = await result.first()
+        if endpoint is None:
+            raise web.HTTPNotFound()
+        result = await conn.execute(
+            response_t.select().where(response_t.c.endpoint_id == endpoint.id)
+            .order_by(desc(response_t.c.id)))
+        response = await result.first()
+        if response is None:
+            raise web.HTTPNotFound()
+        _headers = json.loads(response.headers)
+        headers = []
+        for k, v in _headers.items():
+            headers.append({k: v})
+        response_data = {
+            'headers': headers,
+            'responseBody': response.body,
+            'status_code': response.status_code}
+    return web.json_response(response_data)
+
+
 class EndpointLiveView(web.View):
 
     async def get_endpoint(self, conn):
