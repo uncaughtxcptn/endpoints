@@ -36,7 +36,8 @@
         mounted() {
             this.$store.dispatch('fetchRequestLogs');
 
-            const wsUrl = `wss://${location.host}/${this.hash}/ws`;
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+            const wsUrl = `${wsProtocol}://${window.location.host}/${this.hash}/ws`;
             const ws = new WebSocket(wsUrl);
 
             ws.addEventListener('message', e => {
