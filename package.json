@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/uncaughtxcptn/endpoints#readme",
   "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
     "css-loader": "0.28.9",
     "file-loader": "1.1.6",
     "style-loader": "0.20.1",
