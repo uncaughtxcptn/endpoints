@@ -38,5 +38,10 @@
     "vue-analytics": "5.9.0",
     "vue-router": "3.0.1",
     "vuex": "3.0.1"
+  },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
   }
 }
