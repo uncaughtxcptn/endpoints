@@ -13,7 +13,8 @@ export default new Vuex.Store({
         requestLogs: [],
         bufferedRequestLogs: [],
         availableEndpoints: [],
-        isLoadingNavigation: false
+        isLoadingNavigation: false,
+        isPerformingAction: false
     },
 
     getters: {
@@ -80,6 +81,10 @@ export default new Vuex.Store({
 
         setIsLoadingNavigation(state, isLoadingNavigation) {
             state.isLoadingNavigation = isLoadingNavigation;
+        },
+
+        setIsPerformingAction(state, isPerformingAction) {
+            state.isPerformingAction = isPerformingAction;
         }
     },
 
