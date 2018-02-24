@@ -20,7 +20,7 @@ export default new Vuex.Store({
                 { name: 'Content-Type', value: '' }
             ],
             responseCode: null
-        }
+        },
         isPerformingAction: false
     },
 
