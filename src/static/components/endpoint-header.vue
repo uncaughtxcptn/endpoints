@@ -6,7 +6,7 @@
         </header>
         <div class="switches">
             <labelled-switch label="Live" :checked="isLive" @change="updateLiveStatus"></labelled-switch>
-            <labelled-switch label="Auto Response" :checked="autoResponse" :disabled="true" @change="onAutoResponseChange"></labelled-switch>
+            <labelled-switch label="Auto Response" :checked="willAutoResponse" :disabled="true" @change="onAutoResponseChange"></labelled-switch>
         </div>
 
         <response-form
