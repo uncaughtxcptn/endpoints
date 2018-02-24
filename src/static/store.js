@@ -122,6 +122,15 @@ export default new Vuex.Store({
             return response;
         },
 
+        async setAutoResponse(context, data) {
+            data.responseBody = data.responseBody || '';
+            const endpoint = `/${context.state.hash}/response`;
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: objectToFormData(data)
+            }).then(response => response.json());
+        },
+
         setResponse(context, { id, response }) {
             // TODO: Response should be sent to the backend.
             let responseString = `

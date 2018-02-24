@@ -37,12 +37,7 @@
             },
 
             async onAutoResponseSubmit(data) {
-                data.responseBody = data.responseBody || '';
-                const endpoint = `/${this.hash}/response`;
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    body: objectToFormData(data)
-                }).then(response => response.json());
+                this.$store.dispatch('setAutoResponse');
             },
 
             copyEndpoint() {
