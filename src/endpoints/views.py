@@ -166,7 +166,7 @@ async def get_auto_response(request):
         _headers = json.loads(response.headers)
         headers = []
         for k, v in _headers.items():
-            headers.append({k: v})
+            headers.append({'name': k, 'value': v})
         response_data = {
             'headers': headers,
             'responseBody': response.body,
