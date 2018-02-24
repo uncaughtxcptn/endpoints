@@ -5,12 +5,13 @@ import store from './store';
 import EndpointsApp from './components/endpoints-app.vue';
 import './stylesheets/index.css';
 
-if (window.location.hostname !== 'localhost') {
-    Vue.use(VueAnalytics, {
-        id: 'UA-114651056-1',
-        router
-    });
-}
+const trackingId = 'UA-114651056-1';
+window['ga-disable-' + trackingId] = window.location.hostname === 'localhost';
+
+Vue.use(VueAnalytics, {
+    id: trackingId,
+    router
+});
 
 // Fetch states that are required for every route. Each route could still
 // define their own specific navigation guards.
