@@ -116,6 +116,9 @@ export default new Vuex.Store({
             const response = await fetch('/endpoints').then(response => response.json());
             const endpoint = await endpointsDb.put(response);
             context.commit('insertAvailableEndpoint', endpoint);
+
+            this.$ga.event('endpoints', 'create');
+
             return response;
         },
 
