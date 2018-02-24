@@ -55,19 +55,33 @@
     import { httpStatusCodes } from '../lib/http-choices';
 
     export default {
+        props: ['statusCode', 'headers', 'responseBody'],
+
         data() {
             return {
                 form: {
-                    statusCode: null,
-                    headers: [
-                        { name: 'Content-Type', value: null }
-                    ],
-                    responseBody: null
+                    statusCode: this.statusCode,
+                    headers: this.headers,
+                    responseBody: this.responseBody
                 }
             };
         },
 
         computed: mapState(['isPerformingAction']),
+
+        watch: {
+            statusCode(statusCode) {
+                this.$set(this.form, 'statusCode', statusCode);
+            },
+
+            headers(headers) {
+                this.$set(this.form, 'headers', headers);
+            },
+
+            responseBody(responseBody) {
+                this.$set(this.form, 'responseBody', responseBody);
+            }
+        },
 
         methods: {
             statusCodeGroup(min, max) {

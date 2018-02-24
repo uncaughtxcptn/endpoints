@@ -14,6 +14,13 @@ export default new Vuex.Store({
         bufferedRequestLogs: [],
         availableEndpoints: [],
         isLoadingNavigation: false,
+        autoResponse: {
+            statusCode: null,
+            headers: [
+                { name: 'Content-Type', value: '' }
+            ],
+            responseCode: null
+        },
         isPerformingAction: false
     },
 
@@ -38,6 +45,10 @@ export default new Vuex.Store({
 
         setLiveStatus(state, isLive) {
             state.isLive = isLive;
+        },
+
+        setAutoResponse(state, autoResponse) {
+            state.autoResponse = autoResponse;
         },
 
         setRequestLogs(state, requestLogs) {
@@ -104,6 +115,12 @@ export default new Vuex.Store({
             context.commit('setLiveStatus', isLive);
         },
 
+        async fetchAutoResponse(context) {
+            const endpoint = `/${context.state.hash}/auto-response`;
+            const response = await fetch(endpoint).then(response => response.json());
+            context.commit('setAutoResponse', response);
+        },
+
         async fetchRequestLogs(context) {
             const logsEndpoint = `/${context.state.hash}/logs`;
             let requestLogs = await fetch(logsEndpoint).then(response => response.json());
@@ -137,6 +154,7 @@ export default new Vuex.Store({
                 method: 'POST',
                 body: objectToFormData(data)
             }).then(response => response.json());
+            context.commit('setAutoResponse', data);
 
             context.commit('setIsPerformingAction', false);
         },
