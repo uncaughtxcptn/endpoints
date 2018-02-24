@@ -116,7 +116,21 @@ export default new Vuex.Store({
             const response = await fetch('/endpoints').then(response => response.json());
             const endpoint = await endpointsDb.put(response);
             context.commit('insertAvailableEndpoint', endpoint);
+
+            this.$ga.event('endpoints', 'create');
+
             return response;
+        },
+
+        async setAutoResponse(context, data) {
+            data.responseBody = data.responseBody || '';
+            const endpoint = `/${context.state.hash}/response`;
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: objectToFormData(data)
+            }).then(response => response.json());
+
+            this.$ga.event('endpoints', 'set-auto-response');
         },
 
         setResponse(context, { id, response }) {
