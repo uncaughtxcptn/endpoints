@@ -10,6 +10,7 @@ const webpackConfig = {
         chunkFilename: '[name].js',
         publicPath: '/static/build/'
     },
+    devtool: 'source-map',
     module: {
         rules: [ {
             test: /\.vue$/,
@@ -35,7 +36,6 @@ const webpackConfig = {
 
 // Add extra configs when in production mode.
 if (process.env.NODE_ENV === 'production') {
-    webpackConfig.devtool = 'source-map';
     webpackConfig.plugins = [
         ...(webpackConfig.plugins || []),
         new webpack.DefinePlugin({
