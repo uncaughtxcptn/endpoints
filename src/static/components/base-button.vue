@@ -1,5 +1,5 @@
 <template>
-    <button class="base-button" :type="type" @click="onClick">
+    <button class="base-button" :class="{ loading }" :type="type" @click="onClick">
         <slot></slot>
     </button>
 </template>
@@ -42,5 +42,37 @@
 
     .mini {
         padding: 0.167em 0.33em;
+    }
+
+    .loading {
+        position: relative;
+        color: transparent;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .loading::before {
+        content: "";
+        width: 1.2em;
+        height: 1.2em;
+        border: 1px solid transparent;
+        border-left-color: var(--primary-text-color);
+        border-right-color: var(--primary-text-color);
+        border-radius: 50%;
+        position: absolute;
+        top: calc(50% - 0.6em);
+        left: calc(50% - 0.6em);
+        animation: rotate 500ms linear infinite;
+    }
+
+    .primary.loading::before {
+        border-left-color: #fff;
+        border-right-color: #fff;
+    }
+
+    @keyframes rotate {
+        to {
+            transform: rotate(360deg);
+        }
     }
 </style>
