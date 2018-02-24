@@ -118,9 +118,12 @@ export default new Vuex.Store({
         },
 
         async createEndpoint(context) {
+            context.commit('setIsPerformingAction', true);
+
             const response = await fetch('/endpoints').then(response => response.json());
             const endpoint = await endpointsDb.put(response);
             context.commit('insertAvailableEndpoint', endpoint);
+            context.commit('setIsPerformingAction', false);
 
             this.$ga.event('endpoints', 'create');
 
@@ -128,12 +131,16 @@ export default new Vuex.Store({
         },
 
         async setAutoResponse(context, data) {
+            context.commit('setIsPerformingAction', true);
+
             data.responseBody = data.responseBody || '';
             const endpoint = `/${context.state.hash}/response`;
             const response = await fetch(endpoint, {
                 method: 'POST',
                 body: objectToFormData(data)
             }).then(response => response.json());
+
+            context.commit('setIsPerformingAction', false);
 
             this.$ga.event('endpoints', 'set-auto-response');
         },
