@@ -111,14 +111,8 @@ export default new Vuex.Store({
         },
 
         async fetchAutoResponse(context) {
-            // TODO: Fetch auto-response data from backend
-            const response = {
-                statusCode: 500,
-                headers: [
-                    { name: 'Content-Type', value: 'text/plain' }
-                ],
-                responseBody: 'Something went wrong on our side.'
-            };
+            const endpoint = `/${context.state.hash}/auto-response`;
+            const response = await fetch(endpoint).then(response => response.json());
             context.commit('setAutoResponse', response);
         },
 
