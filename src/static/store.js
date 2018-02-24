@@ -129,6 +129,8 @@ export default new Vuex.Store({
                 method: 'POST',
                 body: objectToFormData(data)
             }).then(response => response.json());
+
+            this.$ga.event('endpoints', 'set-auto-response');
         },
 
         setResponse(context, { id, response }) {
