@@ -11,7 +11,7 @@
 
         <response-form
             v-if="willAutoResponse"
-            @submit="setAutoResponse"
+            @submit="onAutoResponseSubmit"
             :status-code="autoResponse.statusCode"
             :headers="autoResponse.headers"
             :response-body="autoResponse.responseBody">
@@ -33,10 +33,15 @@
         computed: mapState(['baseUrl', 'hash', 'isLive', 'autoResponse']),
 
         methods: {
-            ...mapActions(['updateLiveStatus', 'setAutoResponse']),
+            ...mapActions(['updateLiveStatus']),
 
             onAutoResponseChange(autoResponse) {
                 this.willAutoResponse = autoResponse;
+            },
+
+            onAutoResponseSubmit(data) {
+                this.$store.dispatch('setAutoResponse', data);
+                this.$ga.event('endpoints', 'set-auto-response');
             },
 
             copyEndpoint() {
