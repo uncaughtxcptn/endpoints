@@ -4,7 +4,7 @@
 
         <div class="wrapper">
             <router-link :to="{ name: 'landing-page' }" class="logo">Endpoints</router-link>
-            <base-button class="primary" @click="onClick">Create Endpoint</base-button>
+            <base-button class="primary" @click="onClick" :loading="isPerformingAction">Create Endpoint</base-button>
             <router-link class="list-btn" :to="{ name: 'endpoints-page' }" v-if="hasAvailableEndpoints"></router-link>
         </div>
     </header>
@@ -15,7 +15,7 @@
 
     export default {
         computed: Object.assign({},
-            mapState(['hash']),
+            mapState(['hash', 'isPerformingAction']),
             mapGetters(['hasAvailableEndpoints'])
         ),
 

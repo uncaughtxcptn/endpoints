@@ -44,13 +44,14 @@
         </table>
 
         <div class="form-actions">
-            <base-button class="mini primary" type="submit">Set Response</base-button>
-            <base-button class="mini" @click="addHeader">Add Header</base-button>
+            <base-button class="mini primary" type="submit" :loading="isPerformingAction">Set Response</base-button>
+            <base-button class="mini" :loading="isPerformingAction" @click="addHeader">Add Header</base-button>
         </div>
     </form>
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     import { httpStatusCodes } from '../lib/http-choices';
 
     export default {
@@ -65,6 +66,8 @@
                 }
             };
         },
+
+        computed: mapState(['isPerformingAction']),
 
         methods: {
             statusCodeGroup(min, max) {
