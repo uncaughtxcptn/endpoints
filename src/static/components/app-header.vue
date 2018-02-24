@@ -29,6 +29,8 @@
                     }
                 };
 
+                this.$ga.event('endpoints', 'create');
+
                 if (this.hash) {
                     const route = this.$router.resolve(routeData);
                     window.open(route.href, '_blank');

@@ -123,10 +123,8 @@ export default new Vuex.Store({
             const response = await fetch('/endpoints').then(response => response.json());
             const endpoint = await endpointsDb.put(response);
             context.commit('insertAvailableEndpoint', endpoint);
+
             context.commit('setIsPerformingAction', false);
-
-            this.$ga.event('endpoints', 'create');
-
             return response;
         },
 
@@ -141,8 +139,6 @@ export default new Vuex.Store({
             }).then(response => response.json());
 
             context.commit('setIsPerformingAction', false);
-
-            this.$ga.event('endpoints', 'set-auto-response');
         },
 
         setResponse(context, { id, response }) {
