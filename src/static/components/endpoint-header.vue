@@ -37,7 +37,7 @@
             },
 
             async onAutoResponseSubmit(data) {
-                this.$store.dispatch('setAutoResponse');
+                this.$store.dispatch('setAutoResponse', data);
             },
 
             copyEndpoint() {
