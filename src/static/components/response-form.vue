@@ -29,7 +29,7 @@
                 <td><input type="text" v-model="header.name"></td>
                 <td><input type="text" v-model="header.value"></td>
                 <td class="actions">
-                    <button class="remove-btn" type="button" @click="removeHeader(index)">&times;</button>
+                    <base-button class="mini remove-btn" @click="removeHeader(index)">&times;</base-button>
                 </td>
             </tr>
 
@@ -44,13 +44,14 @@
         </table>
 
         <div class="form-actions">
-            <button class="send-btn">Set Response</button>
-            <button type="button" @click="addHeader">Add Header</button>
+            <base-button class="mini primary" type="submit" :loading="isPerformingAction">Set Response</base-button>
+            <base-button class="mini" :loading="isPerformingAction" @click="addHeader">Add Header</base-button>
         </div>
     </form>
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     import { httpStatusCodes } from '../lib/http-choices';
 
     export default {
@@ -65,6 +66,8 @@
                 }
             };
         },
+
+        computed: mapState(['isPerformingAction']),
 
         watch: {
             statusCode(statusCode) {
@@ -105,6 +108,10 @@
                     }, [])
                 });
             }
+        },
+
+        components: {
+            'base-button': require('./base-button.vue').default
         }
     };
 </script>
@@ -165,28 +172,15 @@
         resize: none;
     }
 
-    button {
-        padding: 0.2rem 0.4rem;
-        border: 1px solid var(--gray-1);
-        border-radius: 2px;
-        text-transform: uppercase;
-        background-color: #fff;
-        cursor: pointer;
+    .base-button {
+        font-size: 1.2rem;
     }
 
     .remove-btn {
         width: 2.2rem;
-        border: 1px solid var(--gray-1);
-        background-color: #fff;
     }
 
-    .send-btn {
-        border: 1px solid var(--primary-color-dark-1);
-        color: #fff;
-        background-color: var(--primary-color);
-    }
-
-    .form-actions button:not(:last-child) {
+    .form-actions .base-button:not(:last-child) {
         margin-right: 0.4rem;
     }
 </style>

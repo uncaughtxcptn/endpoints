@@ -4,8 +4,8 @@
 
         <div class="wrapper">
             <router-link :to="{ name: 'landing-page' }" class="logo">Endpoints</router-link>
-            <button class="button create-btn" @click="onClick">Create Endpoint</button>
-            <router-link class="button list-btn" :to="{ name: 'endpoints-page' }" v-if="hasAvailableEndpoints"></router-link>
+            <base-button class="primary" @click="onClick" :loading="isPerformingAction">Create Endpoint</base-button>
+            <router-link class="list-btn" :to="{ name: 'endpoints-page' }" v-if="hasAvailableEndpoints"></router-link>
         </div>
     </header>
 </template>
@@ -15,7 +15,7 @@
 
     export default {
         computed: Object.assign({},
-            mapState(['hash']),
+            mapState(['hash', 'isPerformingAction']),
             mapGetters(['hasAvailableEndpoints'])
         ),
 
@@ -39,6 +39,7 @@
         },
 
         components: {
+            'base-button': require('./base-button.vue').default,
             'navigation-loader': require('./navigation-loader.vue').default
         }
     };
@@ -69,26 +70,17 @@
         text-decoration: none;
     }
 
-    .button {
-        padding: 0.5em 1em;
-        border-radius: 2px;
-        font-size: 1.3rem;
-        text-transform: uppercase;
-        cursor: pointer;
-    }
-
-    .create-btn {
-        border: 1px solid var(--primary-color-dark-1);
-        color: #fff;
-        background-color: var(--primary-color);
-    }
-
     .list-btn {
         width: 3.3rem;
         height: 3.3rem;
+        padding: 0.5em 1em;
         border: 1px solid var(--gray-1);
+        border-radius: 2px;
         margin-left: 0.4rem;
+        font-size: 1.3rem;
+        text-transform: uppercase;
         background: url("~images/list.png") center center no-repeat;
         background-size: 50%;
+        cursor: pointer;
     }
 </style>
