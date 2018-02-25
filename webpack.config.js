@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+const isProdEnv = process.env.NODE_ENV === 'production';
+
 const webpackConfig = {
     entry: path.resolve(__dirname, 'src/static/index.js'),
     output: {
@@ -10,7 +12,7 @@ const webpackConfig = {
         chunkFilename: '[name].js',
         publicPath: '/static/build/'
     },
-    devtool: 'source-map',
+    devtool: isProdEnv ? 'source-map' : 'cheap-module-eval-source-map',
     module: {
         rules: [ {
             test: /\.vue$/,
@@ -35,7 +37,7 @@ const webpackConfig = {
 };
 
 // Add extra configs when in production mode.
-if (process.env.NODE_ENV === 'production') {
+if (isProdEnv) {
     webpackConfig.plugins = [
         ...(webpackConfig.plugins || []),
         new webpack.DefinePlugin({
