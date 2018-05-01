@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const { VueLoaderPlugin } = require('vue-loader');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -32,5 +33,8 @@ module.exports = {
         alias: {
             images: path.resolve(__dirname, 'src/static/images')
         }
-    }
+    },
+    plugins: [
+        new VueLoaderPlugin()
+    ]
 };
