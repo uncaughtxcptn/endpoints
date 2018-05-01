@@ -1,10 +1,10 @@
-const path = require('path');
-const webpack = require('webpack');
-const { VueLoaderPlugin } = require('vue-loader');
+import path from 'path';
+import webpack from 'webpack';
+import { VueLoaderPlugin } from 'vue-loader';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-module.exports = {
+export default {
     entry: path.resolve(__dirname, 'src/static/index.js'),
     output: {
         path: path.resolve(__dirname, 'src/static/build'),
