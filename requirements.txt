@@ -13,3 +13,4 @@ PyYAML==3.12
 SQLAlchemy==1.2.2
 yarl==1.1.0
 aioredis==1.0.0
+gunicorn
