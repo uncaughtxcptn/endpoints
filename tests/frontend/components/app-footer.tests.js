@@ -11,4 +11,17 @@ describe('AppFooter', () => {
     test('matches snapshot', () => {
         expect(wrapper.element).toMatchSnapshot();
     });
+
+    test('has a link to UncaughtException GitHub profile', () => {
+        const link = wrapper.find('small a');
+        expect(link.attributes('href')).toBe('https://github.com/uncaughtxcptn');
+        expect(link.attributes('target')).toBe('_blank');
+        expect(link.text()).toBe('Uncaught Exception');
+    });
+
+    test('has a link to project\'s GitHub repository', () => {
+        const link = wrapper.find('.github-link');
+        expect(link.attributes('href')).toBe('https://github.com/uncaughtxcptn/endpoints');
+        expect(link.attributes('target')).toBe('_blank');
+    });
 });
