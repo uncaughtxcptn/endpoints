@@ -6,13 +6,16 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 
 export default {
     entry: path.resolve(__dirname, 'src/static/index.js'),
+
     output: {
         path: path.resolve(__dirname, 'src/static/build'),
         filename: 'index.js',
         chunkFilename: '[name].js',
         publicPath: '/static/build/'
     },
+
     mode: NODE_ENV,
+
     module: {
         rules: [ {
             test: /\.vue$/,
@@ -29,11 +32,13 @@ export default {
             }
         } ]
     },
+
     resolve: {
         alias: {
             images: path.resolve(__dirname, 'src/static/images')
         }
     },
+
     plugins: [
         new VueLoaderPlugin()
     ]
