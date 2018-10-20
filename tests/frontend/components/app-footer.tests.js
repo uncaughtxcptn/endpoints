@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import AppFooter from '@/components/app-footer.vue';
 
 describe('AppFooter', () => {
-    const wrapper = mount(AppFooter);
+    const wrapper = shallowMount(AppFooter);
 
     test('is a Vue instance', () => {
         expect(wrapper.isVueInstance()).toBeTruthy();
