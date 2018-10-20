@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppHeader matches snapshot 1`] = `
+<header
+  class="app-header"
+>
+  <navigation-loader-stub />
+   
+  <div
+    class="wrapper"
+  >
+    <router-link-stub
+      class="logo"
+      event="click"
+      tag="a"
+      to="[object Object]"
+    >
+      Endpoints
+    </router-link-stub>
+     
+    <base-button-stub
+      class="primary"
+      type="button"
+    >
+      Create Endpoint
+    </base-button-stub>
+     
+    <!---->
+  </div>
+</header>
+`;
