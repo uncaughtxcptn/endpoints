@@ -3,7 +3,7 @@
         <navigation-loader></navigation-loader>
 
         <div class="wrapper">
-            <router-link :to="{ name: 'landing-page' }" class="logo">Endpoints</router-link>
+            <router-link class="logo" :to="{ name: 'landing-page' }">Endpoints</router-link>
             <base-button class="primary" @click="onClick" :loading="isPerformingAction">Create Endpoint</base-button>
             <router-link class="list-btn" :to="{ name: 'endpoints-page' }" v-if="hasAvailableEndpoints"></router-link>
         </div>

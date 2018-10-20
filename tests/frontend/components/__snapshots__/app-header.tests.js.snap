@@ -9,14 +9,11 @@ exports[`AppHeader matches snapshot 1`] = `
   <div
     class="wrapper"
   >
-    <router-link-stub
+    <a
       class="logo"
-      event="click"
-      tag="a"
-      to="[object Object]"
     >
       Endpoints
-    </router-link-stub>
+    </a>
      
     <base-button-stub
       class="primary"
