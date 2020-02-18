@@ -9,7 +9,7 @@ Jinja2==2.10
 MarkupSafe==1.0
 multidict==4.1.0
 psycopg2==2.7.3.2
-PyYAML==3.12
+PyYAML==5.1
 SQLAlchemy==1.2.2
 yarl==1.1.0
 aioredis==1.0.0
