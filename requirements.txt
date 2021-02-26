@@ -1,4 +1,4 @@
-aiohttp==2.3.10
+aiohttp==3.7.4
 aiohttp-jinja2==0.15.0
 aiopg==0.13.2
 async-timeout==2.0.0
