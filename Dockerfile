@@ -4,7 +4,7 @@ RUN wget -qO node.tar.xz https://nodejs.org/dist/v8.12.0/node-v8.12.0-linux-x64.
 RUN tar -xf node.tar.xz
 ENV PATH="/node-v8.12.0-linux-x64/bin:${PATH}"
 
-Add . /code
+ADD . /code
 WORKDIR /code
 
 RUN pip install -r requirements.txt

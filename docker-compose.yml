@@ -16,6 +16,7 @@ services:
 
   endpoint-service:
     build: .
+    platform: "linux/x86_64"
     volumes:
       - .:/code
     ports:
