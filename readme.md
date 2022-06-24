@@ -37,11 +37,19 @@ $ python main.py
 ```
 
 You can also run the application using docker. Make sure docker and docker-compose is installed in your system
-```
+
+```console
 $ docker-compose up
 # the app will be running at localhost:8080
 ```
 
+On Apple Silicon, run the following with platform-specific build
+
+```console
+$ docker build --platform=linux/x86_64 .
+[+] Building 170.5s (14/14) FINISHED
+...
+```
 
 ## License
 
