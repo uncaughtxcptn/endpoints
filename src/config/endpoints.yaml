@@ -1,8 +1,7 @@
 database:
-  name: endpoint
-  user: endpoint_user
-  password: ue
-  host: postgres
+  name: endpoints
+  user: endpoints
+  password: REPLACE_WITH_DB_PASSWORD
+  host: db
   port: ''
 debug: true
-redis_url: redis://redis

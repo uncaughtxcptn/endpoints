@@ -6,6 +6,7 @@ src/config/local.yaml
 .DS_Store
 endpoints.pem
 dump.rdb
+.env
 
 # code editor stuff
 .vscode
