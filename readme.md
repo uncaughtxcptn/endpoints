@@ -20,6 +20,9 @@ $ cd endpoints
 $ pip install -r requirements.txt
 $ npm install
 
+# Copy the example env file and fill in your database credentials
+$ cp .env.example .env
+
 # Build frontend assets
 $ npm run build
 $ npm run build:watch  # You can also auto-compile assets as they change
@@ -38,6 +41,9 @@ $ python main.py
 
 You can also run the application using docker. Make sure docker and docker-compose is installed in your system
 ```
+# Copy the example env file and fill in your database credentials
+$ cp .env.example .env
+
 $ docker-compose up
 # the app will be running at localhost:8080
 ```
