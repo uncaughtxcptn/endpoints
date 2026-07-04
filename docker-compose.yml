@@ -15,6 +15,7 @@ services:
 
   service:
     build: .
+    env_file: .env
     ports:
       - 3001:8080
     restart: unless-stopped
