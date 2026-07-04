@@ -7,6 +7,8 @@ import jinja2
 
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 from db import init_pg, close_pg
 from routes import setup_routes
 from utils import load_config, dict_merge
@@ -17,6 +19,7 @@ parser = argparse.ArgumentParser(description="endpoints server")
 parser.add_argument('--port')
 
 
+load_dotenv(str(Path('..') / '..' / '.env'))
 app = web.Application()
 conf = load_config(str(Path('..') / 'config' / 'endpoints.yaml'))
 local_conf = load_config(str(Path('..') / 'config' / 'local.yaml'))

@@ -2,6 +2,7 @@ from aiohttp import web
 
 import collections
 import json
+import os
 import yaml
 
 from db import Response
@@ -12,7 +13,7 @@ from sqlalchemy import desc
 def load_config(fname):
     try:
         with open(fname, 'rt') as f:
-            data = yaml.load(f)
+            data = yaml.load(os.path.expandvars(f.read()))
     except FileNotFoundError:
         data = None
     return data

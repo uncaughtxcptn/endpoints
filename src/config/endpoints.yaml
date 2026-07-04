@@ -1,7 +1,7 @@
 database:
-  name: endpoints
-  user: endpoints
-  password: REPLACE_WITH_DB_PASSWORD
-  host: db
-  port: ''
+  name: ${POSTGRES_DB}
+  user: ${POSTGRES_USER}
+  password: ${POSTGRES_PASSWORD}
+  host: ${DB_HOST}
+  port: ${DB_PORT}
 debug: true
