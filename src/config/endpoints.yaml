@@ -5,3 +5,4 @@ database:
   host: ${DB_HOST}
   port: ${DB_PORT}
 debug: true
+redis_url: redis://redis
