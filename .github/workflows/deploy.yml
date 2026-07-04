@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+    push:
+        branches: [master]
+
+concurrency:
+    group: deploy-master
+    cancel-in-progress: false
+
+jobs:
+    deploy:
+        runs-on: self-hosted
+        steps:
+            # The runner's workspace holds the git-ignored .env, so this
+            # checkout uses clean: false to avoid git clean -ffdx wiping it.
+            - uses: actions/checkout@v4
+              with:
+                  clean: false
+            - name: Build and restart containers
+              run: docker compose up -d --build
+            - name: Remove dangling images
+              run: docker image prune -f
